@@ -3,40 +3,103 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Show Workspace</title>
+    <link rel="shortcut icon" type="image/png" href="~/public/images/favicon.png" />
+    <link rel="stylesheet" href="~/public/libs/font-awesome-5/css/all.css">
+    <link rel="stylesheet" href="~/public/libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/public/build/css/style.css">
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    <header class="cw-header">
+        <div class="cw-header-left">
+            <a href="#"><img src="~/public/images/favicon.png" alt="logo website"></a>
+            <span id="search">
+                <form action="#" method="GET">
+                    <input type="search" name="search" placeholder="Search or jump to...">
+                </form>
+            </span>
+        </div>
+        <div class="cw-header-right">
+            <span class="cw-notify">
+                <span class="cw-notify-quantity">1</span>
+                <i class="fas fa-bell cw-bell"></i>
+            </span>
+            <span class="dropdown cw-add-group">
+                <a id="add-group" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-plus"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="add-group">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </span>
+            <span class="dropdown cw-user-infor">
+                <a id="user-infor" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="public/images/avatar.png" alt="user's avatar">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="user-infor">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </span>
+        </div>
+        <div class="clearfix"></div>
+    </header>
+    <body>
+        <div class="cw-body">
+            <nav class="cw-body-left cw-menu">
+                <ul class="nav side-menu">
+                    <li class="fas fa-home">
+                        @Html.ActionLink("Create WP", "CreateWP", "Home")
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-edit"></i> Form
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-desktop"></i> UI Element
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-table"></i> Tables
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chart-bar"></i> Data Presentation
+                        </a>
+                    </li>
                 </ul>
+            </nav>
+            <div class="cw-body-right cw-content">
+
+                @RenderBody()
+
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    </body>
+    <footer class="cw-footer">
+        <div class="cw-social">
+            <ul>
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+            </ul>
+        </div>
+        <div class="cw-copyright">
+            &copy; 2018 by ClockWorks. Prodly created with vanlanguni.edu.vn
+        </div>
+    </footer>
 </body>
+
+@Scripts.Render("~/public/libs/jquery/dist/jquery.min.js");
+@Scripts.Render("~/public/libs/bootstrap/dist/js/bootstrap.min.js");
+@Scripts.Render("~/public/build/js/fixHeight.js");
 </html>

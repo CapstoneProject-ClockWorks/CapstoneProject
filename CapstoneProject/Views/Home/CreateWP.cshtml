@@ -1,0 +1,64 @@
+﻿@model CapstoneProject.Models.WorkSpace
+
+@{
+    ViewBag.Title = "CreateWP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="cw-container">
+    <div class="cw-title">Sign up your workspace</div>
+    <ol class="cw-steps">
+        <li class="current">
+            <i class="fas fa-briefcase"></i>
+            <strong class="cw-step">Step 1:</strong>Set up your workspace
+        </li>
+        <li>
+            <i class="fas fa-user-plus"></i>
+            <strong class="cw-step">Step 2:</strong>Set up your workspace
+        </li>
+    </ol>
+    <div class="cw-create-workspace">
+        <h2 class="cw-header-light">Create your workspace right away!!</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    <label for="cw-workspace-name" class="cw-required">Workspace name</label>
+                    <div>
+                        @Html.EditorFor(model => model.workspace_name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.workspace_name, "", new { @class = "text-danger" })
+                    </div>
+                    <span class="cw-hint">This will be your workspace name on our website</span>
+                </div>
+                <div class="form-group">
+                    <label for="cw-workspace-email" class="cw-required">Billing Email</label>
+                    @Html.EditorFor(model => model.bilimail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.bilimail, "", new { @class = "text-danger" })
+                    <span class="cw-hint">We'll send receipts to this mail box</span>
+                </div>
+                <div class="form-group">
+                    <label for="cw-workspace-description">Description</label>
+                    <textarea name="description" class="form-control" id="cw-workspace-description" cols="30" rows="10">@Html.ValueFor(m => m.description)</textarea>
+                    <span class="cw-hint">Describe your workspace that you want to establish</span>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create workspace" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

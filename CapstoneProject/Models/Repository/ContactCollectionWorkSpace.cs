@@ -13,7 +13,7 @@ namespace CapstoneProject.Models.Repository
         //Intializes the mongo db repository
         internal MongoDbRepo _repo = new MongoDbRepo("mongodb://DuyHo:hothanhphuongduy2101@ds227469.mlab.com:27469/capstoneproject_k21t1_team8", "capstoneproject_k21t1_team8");
         //Defines the collection name used by project
-        private const string _collectionName = "WorkPlace";
+        private const string _collectionName = "workspace";
         //Contains all documents inside the collection
         public IMongoCollection<WorkSpace> Collection;
 
@@ -56,7 +56,6 @@ namespace CapstoneProject.Models.Repository
         public void UpdateContact(string id, WorkSpace contact)
         {
             contact._id = new ObjectId(id);
-
             var filter = Builders<WorkSpace>.Filter.Eq(s => s._id, contact._id);
             this.Collection.ReplaceOneAsync(filter, contact);
         }

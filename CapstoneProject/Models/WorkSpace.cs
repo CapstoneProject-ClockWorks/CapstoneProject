@@ -15,8 +15,10 @@ namespace CapstoneProject.Models
         public ObjectId _id { get; set; }
         [BsonElement("workspace_name")]
         public string workspace_name { get; set; }
-        [BsonElement("decprition")]
-        public string decprition { get; set; }
+        [BsonElement("description")]
+        public string description { get; set; }
+        [BsonElement("bilimail")]
+        public string bilimail { get; set; }
         [BsonElement("image")]
         public string image { get; set; }
     }
