@@ -42,7 +42,7 @@ namespace CapstoneProject.Controllers
         public ActionResult CreateWP(WorkSpace contact)
         {
             this._contacts.InsertContact(contact);
-            return RedirectToAction("Index", _contacts.SelectAll());
+            return RedirectToAction("AddMemberWP", _contacts.SelectAll());
         }
 
         public ActionResult Edit(string contactId)
@@ -56,6 +56,17 @@ namespace CapstoneProject.Controllers
             this._contacts.UpdateContact(_id, contact);
 
             return RedirectToAction("Index", _contacts.SelectAll());
+        }
+
+        public ActionResult AddMemberWP()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddmemberWP()
+        {
+            return RedirectToAction("Index");
         }
     }
 }

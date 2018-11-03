@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "AddMemberWP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="cw-container">
+    <div class="cw-title">Invite members to your workspace</div>
+    <ol class="cw-steps">
+        <li class="active">
+            <i class="fas fa-briefcase"></i>
+            <strong class="cw-step">Step 1:</strong>Set up your workspace
+        </li>
+        <li class="current">
+            <i class="fas fa-user-plus"></i>
+            <strong class="cw-step">Step 2:</strong>Set up your workspace
+        </li>
+    </ol>
+    <div class="cw-add-member">
+        <form action="#" method="POST">
+            <div class="form-group">
+                <label for="cw-members-name" class="cw-required">Search by username, fullname or email address</label>
+                <span class="cw-input-icon">
+                    <input type="text" name="name" class="form-control cw-input-has-icon" id="cw-members-name">
+                    <i class="fas fa-user cw-label-icon"></i>
+                </span>
+                <button class="btn btn-default disabled">Invite</button>
+            </div>
+            <div>
+                <button class="btn btn-success">Continue</button>
+            </div>
+        </form>
+    </div>
+</div>
+
