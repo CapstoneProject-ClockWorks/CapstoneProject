@@ -4,18 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CapstoneProject.Models;
-using CapstoneProject.Models.Repository;
-using MongoDB.Driver;
+using System.IO;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+
 
 namespace CapstoneProject.Controllers
 {
     public class HomeController : Controller
     {
-
-        private ContactCollectionWorkSpace _contacts = new ContactCollectionWorkSpace();
+        CapstoneProjectModelEntities db = new CapstoneProjectModelEntities();
         public ActionResult Index()
         {
-            return View(_contacts.SelectAll());
+            var viewlistworkspace = db.WorkSpaces.OrderByDescending(m => m.ID).ToList();
+            return View(viewlistworkspace);
         }
 
         public ActionResult About()
@@ -32,41 +34,85 @@ namespace CapstoneProject.Controllers
             return View();
         }
 
-        public ActionResult CreateWP()
+        public ActionResult CreateWorkSpace()
         {
-
-            return View();
+            if (Request.IsAuthenticated)
+            {
+                string user = User.Identity.GetUserName();
+                Session["UserName"] = user;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         [HttpPost]
-        public ActionResult CreateWP(WorkSpace contact)
+        public ActionResult CreateWorkSpace(WorkSpace ws)
         {
-            this._contacts.InsertContact(contact);
-            return RedirectToAction("AddMemberWP", _contacts.SelectAll());
-        }
-
-        public ActionResult Edit(string contactId)
-        {
-            return View(_contacts.Get(contactId));
-        }
-
-        [HttpPost]
-        public ActionResult Edit(string _id, WorkSpace contact)
-        {
-            this._contacts.UpdateContact(_id, contact);
-
-            return RedirectToAction("Index", _contacts.SelectAll());
-        }
-
-        public ActionResult AddMemberWP()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult AddmemberWP()
-        {
+            ws.Createdate = DateTime.Now;
+            //ws.Bilimail = Session["UserName"].ToString();
+            db.WorkSpaces.Add(ws);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult DeleteWorkSpace(WorkSpace ws)
+        {
+            WorkSpace worksp = db.WorkSpaces.Find(ws.ID);
+            db.WorkSpaces.Remove(worksp);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult ShowWorkSpace(int? id)
+        {
+            WorkSpace showws = db.WorkSpaces.Find(id);
+            if (showws == null)
+            {
+                return HttpNotFound();
+            }
+            return View(showws);
+        }
+
+        public ActionResult AddMemberWS(int? id)
+        {
+           
+            WorkSpace addmem = db.WorkSpaces.Find(id);
+            return View(addmem);
+        }
+
+        [HttpPost]
+        public ActionResult AddMemberWS(WorkSpace model,List<string> adduser)
+        {
+            WorkSpace wp = db.WorkSpaces.Find(model.ID);
+            foreach (var user in adduser)
+            {
+                WS_User_Roles wsuser = new WS_User_Roles();
+                wsuser.User_ID = db.AspNetUsers.SingleOrDefault(x => x.Email == user).Id;
+                wsuser.WorkSpace_ID = wp.ID;
+                db.WS_User_Roles.Add(wsuser);
+            }
+            db.SaveChanges();
+            return RedirectToAction("ShowWorkSpace");
+        }
+
+        public ActionResult SettingWorkSpace(int? id)
+        {
+            WorkSpace editws = db.WorkSpaces.Find(id);
+            return View(editws);
+        }
+
+        [HttpPost]
+        public ActionResult SettingWorkSpace(WorkSpace model)
+        {
+            WorkSpace ws = db.WorkSpaces.Find(model.ID);
+            ws.WorkSpaceName = model.WorkSpaceName;
+            ws.Description = model.Description;
+            db.SaveChanges();
+            return RedirectToAction("ShowWorkSpace");
+        }
+        
     }
 }

@@ -1,39 +1,37 @@
-﻿@model IEnumerable<CapstoneProject.Models.WorkSpace>
-@{ 
+﻿@using CapstoneProject.Models;
+@model IEnumerable<CapstoneProject.Models.WorkSpace>
+
+@{
     ViewBag.Title = "Home Page";
 }
-
-<h2>Workspace list</h2>
-<table border="1">
+<div>@Html.ActionLink("CreateWorkSpace", "CreateWorkSpace","Home")</div>
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Decription</th>
-            <th>Billing Email</th>
-            <th>Image</th>
-            <th>Tool</th>
+            <th>WorkSpace Name</th>
+            <th>Discription</th>
+            <th>Bilimail</th>
+            <th>Create date</th>
         </tr>
     </thead>
+    <tfoot>
+        <tr>
+            <th>WorkSpace Name</th>
+            <th>Discription</th>
+            <th>Bilimail</th>
+            <th>Create date</th>
+        </tr>
+    </tfoot>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.workspace_name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.bilimail)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.image)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { contactId = item._id })
-                </td>
+                <td>@Html.ActionLink(item.WorkSpaceName, "ShowWorkSpace", new { id = item.ID })</td>
+                <td>@Html.DisplayFor(modle => item.Description)</td>
+                <td>@Html.DisplayFor(model => item.Bilimail)</td>
+                <td>@Html.DisplayFor(modle => item.Createdate)</td>
             </tr>
         }
+
     </tbody>
 </table>
