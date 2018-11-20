@@ -78,7 +78,6 @@ namespace CapstoneProject.Controllers
 
         public ActionResult AddMemberWS(int? id)
         {
-           
             WorkSpace addmem = db.WorkSpaces.Find(id);
             return View(addmem);
         }
@@ -92,10 +91,11 @@ namespace CapstoneProject.Controllers
                 WS_User_Roles wsuser = new WS_User_Roles();
                 wsuser.User_ID = db.AspNetUsers.SingleOrDefault(x => x.Email == user).Id;
                 wsuser.WorkSpace_ID = wp.ID;
+                wsuser.Role_ID = 3;//3 là id của RoleWorkSpace
                 db.WS_User_Roles.Add(wsuser);
             }
             db.SaveChanges();
-            return RedirectToAction("ShowWorkSpace");
+            return RedirectToAction("ShowWorkSpace", new { id = model.ID });
         }
 
         public ActionResult SettingWorkSpace(int? id)
@@ -113,6 +113,12 @@ namespace CapstoneProject.Controllers
             db.SaveChanges();
             return RedirectToAction("ShowWorkSpace");
         }
-        
+
+        public ActionResult EditRoleMemberWS()
+        {
+            return View();
+        }
+
+
     }
 }

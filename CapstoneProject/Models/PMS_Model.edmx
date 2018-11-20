@@ -56,6 +56,13 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="RoleWorkSpace">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -84,7 +91,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WorkSpace_ID" Type="int" Nullable="false" />
           <Property Name="User_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Role_ID" Type="int" />
+          <Property Name="Role_ID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -154,6 +161,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WS_User_Roles_RoleWorkSpace">
+          <End Role="RoleWorkSpace" Type="Self.RoleWorkSpace" Multiplicity="1" />
+          <End Role="WS_User_Roles" Type="Self.WS_User_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleWorkSpace">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WS_User_Roles">
+              <PropertyRef Name="Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_WS_User_Roles_WorkSpace">
           <End Role="WorkSpace" Type="Self.WorkSpace" Multiplicity="1" />
           <End Role="WS_User_Roles" Type="Self.WS_User_Roles" Multiplicity="*" />
@@ -172,6 +191,7 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleWorkSpace" EntityType="Self.RoleWorkSpace" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkSpace" EntityType="Self.WorkSpace" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WS_User_Roles" EntityType="Self.WS_User_Roles" Schema="dbo" store:Type="Tables" />
@@ -193,6 +213,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_WS_User_Roles_AspNetUsers" Association="Self.FK_WS_User_Roles_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="WS_User_Roles" EntitySet="WS_User_Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WS_User_Roles_RoleWorkSpace" Association="Self.FK_WS_User_Roles_RoleWorkSpace">
+            <End Role="RoleWorkSpace" EntitySet="RoleWorkSpace" />
             <End Role="WS_User_Roles" EntitySet="WS_User_Roles" />
           </AssociationSet>
           <AssociationSet Name="FK_WS_User_Roles_WorkSpace" Association="Self.FK_WS_User_Roles_WorkSpace">
@@ -252,6 +276,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_WS_User_Roles_WorkSpace" Association="CapstoneProjectModelModel.FK_WS_User_Roles_WorkSpace">
             <End Role="WorkSpace" EntitySet="WorkSpaces" />
+            <End Role="WS_User_Roles" EntitySet="WS_User_Roles" />
+          </AssociationSet>
+          <EntitySet Name="RoleWorkSpaces" EntityType="CapstoneProjectModelModel.RoleWorkSpace" />
+          <AssociationSet Name="FK_WS_User_Roles_RoleWorkSpace" Association="CapstoneProjectModelModel.FK_WS_User_Roles_RoleWorkSpace">
+            <End Role="RoleWorkSpace" EntitySet="RoleWorkSpaces" />
             <End Role="WS_User_Roles" EntitySet="WS_User_Roles" />
           </AssociationSet>
         </EntityContainer>
@@ -344,9 +373,10 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WorkSpace_ID" Type="Int32" Nullable="false" />
           <Property Name="User_ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Role_ID" Type="Int32" />
+          <Property Name="Role_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="CapstoneProjectModelModel.FK_WS_User_Roles_AspNetUsers" FromRole="WS_User_Roles" ToRole="AspNetUser" />
           <NavigationProperty Name="WorkSpace" Relationship="CapstoneProjectModelModel.FK_WS_User_Roles_WorkSpace" FromRole="WS_User_Roles" ToRole="WorkSpace" />
+          <NavigationProperty Name="RoleWorkSpace" Relationship="CapstoneProjectModelModel.FK_WS_User_Roles_RoleWorkSpace" FromRole="WS_User_Roles" ToRole="RoleWorkSpace" />
         </EntityType>
         <Association Name="FK_WS_User_Roles_AspNetUsers">
           <End Type="CapstoneProjectModelModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -369,6 +399,26 @@
             </Principal>
             <Dependent Role="WS_User_Roles">
               <PropertyRef Name="WorkSpace_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RoleWorkSpace">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WS_User_Roles" Relationship="CapstoneProjectModelModel.FK_WS_User_Roles_RoleWorkSpace" FromRole="RoleWorkSpace" ToRole="WS_User_Roles" />
+        </EntityType>
+        <Association Name="FK_WS_User_Roles_RoleWorkSpace">
+          <End Type="CapstoneProjectModelModel.RoleWorkSpace" Role="RoleWorkSpace" Multiplicity="1" />
+          <End Type="CapstoneProjectModelModel.WS_User_Roles" Role="WS_User_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleWorkSpace">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WS_User_Roles">
+              <PropertyRef Name="Role_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -460,6 +510,14 @@
                 <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
                 <ScalarProperty Name="WorkSpace_ID" ColumnName="WorkSpace_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleWorkSpaces">
+            <EntityTypeMapping TypeName="CapstoneProjectModelModel.RoleWorkSpace">
+              <MappingFragment StoreEntitySet="RoleWorkSpace">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -233,6 +233,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PMS_Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\RoleWorkSpace.cs">
+      <DependentUpon>PMS_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>PMS_Model.tt</DependentUpon>
     </Compile>
