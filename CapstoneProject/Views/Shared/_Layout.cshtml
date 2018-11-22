@@ -3,42 +3,49 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Proccess Management System</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+<body class="nav-sm">
+    <div class="container body">
+        <div class="main_container">
+            @Html.Partial("~/Views/Shared/Layouts/menu.cshtml")
+            @Html.Partial("~/Views/Shared/Layouts/header.cshtml")
+            <!--Content body-->
+            <div class="right_col" id="body" role="main">
+                @RenderBody()
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+            <!--/ Content body-->
+            @Html.Partial("~/Views/Shared/Layouts/footer.cshtml")
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Content/js")
+    <script>
+        $(document).ready(function(){
+            //var lang = CapstoneProject.Cookies.getCookie("LangFOrLangForProcessManagementSystem");
+            //$('.setLang[data-lang="' + lang + '"]').addClass('active-lang');
+            $('.setLang').on('click', function () {
+                var lang = $(this).attr("data-lang");
+
+                deleteCookie("LangForProcessManagementSystem");
+                setCookie("LangForProcessManagementSystem", lang, 7);
+                location.reload(true);
+            })
+    
+        })
+        function deleteCookie(name) {
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+        function setCookie(name, value, exday) {
+            deleteCookie(name);
+            var d = new Date()
+            d.setTime(d.getTime() + (exday * 24 * 60 * 60));
+            var expires = "expires=" + d.toUTCString();
+            console.log(expires);
+            document.cookie = name + "=" + value + "; " + expires+"; path=/";
+        }
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

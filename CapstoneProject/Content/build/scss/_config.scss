@@ -1,0 +1,14 @@
+$primaryColor: #000000;
+$iconColor:white;
+$iconColor-Hover:rgb(223, 219, 219);
+$primaryColor-Hover:#b4b4b4;
+$primaryTextColor-Hover:#141414;
+$container-left-size:150px;
+$padding-container: 30px $container-left-size;
+$light-border:1px solid #dfe2e5;
+a{
+    color: rgb(87, 151, 229);
+    &:hover{
+        color: rgb(21, 92, 179);
+    }
+}

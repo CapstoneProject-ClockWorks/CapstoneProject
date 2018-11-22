@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-
+using CapstoneProject.Helpers;
 namespace CapstoneProject
 {
     public class MvcApplication : System.Web.HttpApplication

@@ -8,23 +8,23 @@ namespace CapstoneProject
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
-
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
-
+            
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                "~/Content/libs/font-awesome-4/css/font-awesome.min.css",
+                "~/Content/libs/font-awesome-5/css/all.css",
+                "~/Content/libs/bootstrap/dist/css/bootstrap.min.css",
+                "~/Content/build/css/responsive.css",
+                "~/Content/build/css/style.css"
+            ));
+            bundles.Add(new ScriptBundle("~/Content/js").Include(
+                "~/Content/libs/jquery/dist/jquery.min.js",
+                "~/Content/libs/bootstrap/dist/js/bootstrap.min.js",
+                "~/Content/libs/font-awesome-5/js/all.js",
+                "~/Content/build/js/common.js",
+                "~/Content/build/js/custom.min.js",
+                "~/Content/build/js/fixHeight.js"
+            ));
+
         }
     }
 }
