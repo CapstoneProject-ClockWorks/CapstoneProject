@@ -1,8 +1,9 @@
 ﻿@model CapstoneProject.Models.WorkSpace
-
+@using CapstoneProject.Models;
 @{
     ViewBag.Title = "ShowWorkSpace";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var db = new CapstoneProjectModelEntities();
 }
 
 <h2>ShowWorkSpace</h2>
@@ -19,4 +20,12 @@
         <i class="fas fa-cog">@Html.ActionLink("Settings", "SettingWorkSpace", new { id = Model.ID })</i>&nbsp;
     </li>
 </ul>
+
+@{
+    var listuser = db.WS_User_Roles.Where(x => x.WorkSpace_ID == Model.ID).ToList();
+}
+
+@foreach(var item in listuser ) { 
+    <p>@item.AspNetUser.Email</p>
+}
 

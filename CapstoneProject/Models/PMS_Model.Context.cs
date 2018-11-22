@@ -32,5 +32,6 @@ namespace CapstoneProject.Models
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<WS_User_Roles> WS_User_Roles { get; set; }
+        public virtual DbSet<RoleWorkSpace> RoleWorkSpaces { get; set; }
     }
 }

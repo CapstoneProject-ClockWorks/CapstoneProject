@@ -17,6 +17,8 @@
         <EntityTypeShape EntityType="CapstoneProjectModelModel.WS_User_Roles" Width="1.5" PointX="12.875" PointY="2.875" />
         <AssociationConnector Association="CapstoneProjectModelModel.FK_WS_User_Roles_AspNetUsers" />
         <AssociationConnector Association="CapstoneProjectModelModel.FK_WS_User_Roles_WorkSpace" />
+        <EntityTypeShape EntityType="CapstoneProjectModelModel.RoleWorkSpace" Width="1.5" PointX="6" PointY="0.5" />
+        <AssociationConnector Association="CapstoneProjectModelModel.FK_WS_User_Roles_RoleWorkSpace" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

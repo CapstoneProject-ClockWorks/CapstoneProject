@@ -31,18 +31,51 @@
             @*</select>*@
         </div>
 
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Add Member" class="btn btn-default" />
             </div>
         </div>
 
+        <div>
+
+        </div>
+
     </div>
 
 }
 
+
+@{
+    var listuser = db.WS_User_Roles.Where(x => x.WorkSpace_ID == Model.ID).ToList();
+}
+
+
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Member</th>
+            <th>Role</th>
+            <th>Tool</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in listuser)
+        {
+            <tr>
+                <td>@item.AspNetUser.Email</td>
+                <td>@Html.DisplayFor(role => item.Role_ID)</td>
+                <td>@Html.ActionLink("Edit Role", "EditRoleMemberWS", new { id = item.User_ID })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
 <div>
-    @Html.ActionLink("Back to List", "ShowWorkSpace")
+    @Html.ActionLink("Back to List", "ShowWorkSpace", new { id = Model.ID })
 </div>
 
 @section Scripts {

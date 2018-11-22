@@ -12,15 +12,18 @@ namespace CapstoneProject.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class WS_User_Roles
+    public partial class RoleWorkSpace
     {
-        public int ID { get; set; }
-        public int WorkSpace_ID { get; set; }
-        public string User_ID { get; set; }
-        public int Role_ID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public RoleWorkSpace()
+        {
+            this.WS_User_Roles = new HashSet<WS_User_Roles>();
+        }
     
-        public virtual AspNetUser AspNetUser { get; set; }
-        public virtual WorkSpace WorkSpace { get; set; }
-        public virtual RoleWorkSpace RoleWorkSpace { get; set; }
+        public int ID { get; set; }
+        public string RoleName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WS_User_Roles> WS_User_Roles { get; set; }
     }
 }
