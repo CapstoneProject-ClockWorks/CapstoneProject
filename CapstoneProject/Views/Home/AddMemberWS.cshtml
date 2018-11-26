@@ -5,6 +5,7 @@
     ViewBag.Title = "AddMemberWS";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var db = new CapstoneProjectModelEntities();
+    
 }
 
 @using (Html.BeginForm("AddMemberWS", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -49,6 +50,8 @@
 
 @{
     var listuser = db.WS_User_Roles.Where(x => x.WorkSpace_ID == Model.ID).ToList();
+
+    
 }
 
 
@@ -65,8 +68,8 @@
         {
             <tr>
                 <td>@item.AspNetUser.Email</td>
-                <td>@Html.DisplayFor(role => item.Role_ID)</td>
-                <td>@Html.ActionLink("Edit Role", "EditRoleMemberWS", new { id = item.User_ID })</td>
+                <td>@Html.DisplayFor(role => item.RoleWorkSpace.RoleName)</td>
+                <td>@Html.ActionLink("Edit Role", "EditRoleMemberWS", new { id = item.ID })</td>
             </tr>
         }
     </tbody>

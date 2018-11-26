@@ -1,0 +1,87 @@
+﻿@model CapstoneProject.Models.WS_User_Roles
+@using CapstoneProject.Models
+
+@{
+    ViewBag.Title = "EditRoleMemberWS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var db = new CapstoneProjectModelEntities();
+    var lsft = db.WS_User_Roles.Where(x => x.Role_ID == Model.RoleWorkSpace.ID).ToList();
+}
+
+<h2>EditRoleMemberWS</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>WS_User_Roles</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        @{
+            var username = db.AspNetUsers.Where(x => x.Id == Model.User_ID).ToList();
+        }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.WorkSpace_ID, "WorkSpace_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.ValueFor(model => model.WorkSpace_ID)
+                @Html.ValidationMessageFor(model => model.WorkSpace_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.User_ID, "User_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @foreach (var item in username)
+                {
+                    @Html.EditorFor(model => model.User_ID, new { htmlAttributes = new { @Value = item.Email, @class = "form-control", @Readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.User_ID, "", new { @class = "text-danger" })
+                }
+            </div>
+        </div>
+
+        <div class="form-group container">
+            @Html.LabelFor(model => model.Role_ID, "Role_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @foreach (var role in db.RoleWorkSpaces)
+            {
+                <div class="input-group col-md-3" style="margin:7px;padding: 0;margin-left:20px">
+                    <span class="input-group">@role.RoleName</span>
+                    <input runat="server" value="@role.RoleName" id="@role.ID" type="checkbox" class="form-control-radio" name="chk1">
+                </div>
+            }
+
+        </div>
+
+        <div class="form-group">
+                @Html.LabelFor(model => model.Role_ID, "Role_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Role_ID", new SelectList(ViewBag.editrole, "ID", "RoleName", Model.RoleWorkSpace), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Role_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+@section Scripts
+    {
+    @foreach (var item2 in lsft)
+    {
+        <script>
+                $("#@item2.ID").attr('checked', true);
+        </script>
+    }
+}
