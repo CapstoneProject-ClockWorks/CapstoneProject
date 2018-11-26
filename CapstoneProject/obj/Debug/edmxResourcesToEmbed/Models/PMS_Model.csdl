@@ -50,11 +50,6 @@
       <End Role="WorkSpace" EntitySet="WorkSpaces" />
       <End Role="WS_User_Roles" EntitySet="WS_User_Roles" />
     </AssociationSet>
-    <EntitySet Name="RoleWorkSpaces" EntityType="CapstoneProjectModelModel.RoleWorkSpace" />
-    <AssociationSet Name="FK_WS_User_Roles_RoleWorkSpace" Association="CapstoneProjectModelModel.FK_WS_User_Roles_RoleWorkSpace">
-      <End Role="RoleWorkSpace" EntitySet="RoleWorkSpaces" />
-      <End Role="WS_User_Roles" EntitySet="WS_User_Roles" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="AspNetRole">
     <Key>
@@ -145,10 +140,11 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="WorkSpace_ID" Type="Int32" Nullable="false" />
     <Property Name="User_ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Role_ID" Type="Int32" Nullable="false" />
+    <Property Name="Role_Admin" Type="Boolean" />
+    <Property Name="Role_Manager" Type="Boolean" />
+    <Property Name="Role_Member" Type="Boolean" />
     <NavigationProperty Name="AspNetUser" Relationship="CapstoneProjectModelModel.FK_WS_User_Roles_AspNetUsers" FromRole="WS_User_Roles" ToRole="AspNetUser" />
     <NavigationProperty Name="WorkSpace" Relationship="CapstoneProjectModelModel.FK_WS_User_Roles_WorkSpace" FromRole="WS_User_Roles" ToRole="WorkSpace" />
-    <NavigationProperty Name="RoleWorkSpace" Relationship="CapstoneProjectModelModel.FK_WS_User_Roles_RoleWorkSpace" FromRole="WS_User_Roles" ToRole="RoleWorkSpace" />
   </EntityType>
   <Association Name="FK_WS_User_Roles_AspNetUsers">
     <End Type="CapstoneProjectModelModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -171,26 +167,6 @@
       </Principal>
       <Dependent Role="WS_User_Roles">
         <PropertyRef Name="WorkSpace_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="RoleWorkSpace">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="WS_User_Roles" Relationship="CapstoneProjectModelModel.FK_WS_User_Roles_RoleWorkSpace" FromRole="RoleWorkSpace" ToRole="WS_User_Roles" />
-  </EntityType>
-  <Association Name="FK_WS_User_Roles_RoleWorkSpace">
-    <End Type="CapstoneProjectModelModel.RoleWorkSpace" Role="RoleWorkSpace" Multiplicity="1" />
-    <End Type="CapstoneProjectModelModel.WS_User_Roles" Role="WS_User_Roles" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RoleWorkSpace">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="WS_User_Roles">
-        <PropertyRef Name="Role_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

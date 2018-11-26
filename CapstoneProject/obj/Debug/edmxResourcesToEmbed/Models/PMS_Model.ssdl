@@ -51,13 +51,6 @@
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
   </EntityType>
-  <EntityType Name="RoleWorkSpace">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
-  </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
       <PropertyRef Name="diagram_id" />
@@ -86,7 +79,9 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="WorkSpace_ID" Type="int" Nullable="false" />
     <Property Name="User_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="Role_ID" Type="int" Nullable="false" />
+    <Property Name="Role_Admin" Type="bit" />
+    <Property Name="Role_Manager" Type="bit" />
+    <Property Name="Role_Member" Type="bit" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -156,18 +151,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_WS_User_Roles_RoleWorkSpace">
-    <End Role="RoleWorkSpace" Type="Self.RoleWorkSpace" Multiplicity="1" />
-    <End Role="WS_User_Roles" Type="Self.WS_User_Roles" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RoleWorkSpace">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="WS_User_Roles">
-        <PropertyRef Name="Role_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_WS_User_Roles_WorkSpace">
     <End Role="WorkSpace" Type="Self.WorkSpace" Multiplicity="1" />
     <End Role="WS_User_Roles" Type="Self.WS_User_Roles" Multiplicity="*" />
@@ -186,7 +169,6 @@
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="RoleWorkSpace" EntityType="Self.RoleWorkSpace" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WorkSpace" EntityType="Self.WorkSpace" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WS_User_Roles" EntityType="Self.WS_User_Roles" Schema="dbo" store:Type="Tables" />
@@ -208,10 +190,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_WS_User_Roles_AspNetUsers" Association="Self.FK_WS_User_Roles_AspNetUsers">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="WS_User_Roles" EntitySet="WS_User_Roles" />
-    </AssociationSet>
-    <AssociationSet Name="FK_WS_User_Roles_RoleWorkSpace" Association="Self.FK_WS_User_Roles_RoleWorkSpace">
-      <End Role="RoleWorkSpace" EntitySet="RoleWorkSpace" />
       <End Role="WS_User_Roles" EntitySet="WS_User_Roles" />
     </AssociationSet>
     <AssociationSet Name="FK_WS_User_Roles_WorkSpace" Association="Self.FK_WS_User_Roles_WorkSpace">

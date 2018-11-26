@@ -17,10 +17,11 @@ namespace CapstoneProject.Models
         public int ID { get; set; }
         public int WorkSpace_ID { get; set; }
         public string User_ID { get; set; }
-        public int Role_ID { get; set; }
+        public Nullable<bool> Role_Admin { get; set; }
+        public Nullable<bool> Role_Manager { get; set; }
+        public Nullable<bool> Role_Member { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual WorkSpace WorkSpace { get; set; }
-        public virtual RoleWorkSpace RoleWorkSpace { get; set; }
     }
 }

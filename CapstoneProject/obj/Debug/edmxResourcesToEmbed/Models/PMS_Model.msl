@@ -80,17 +80,11 @@
     <EntitySetMapping Name="WS_User_Roles">
       <EntityTypeMapping TypeName="CapstoneProjectModelModel.WS_User_Roles">
         <MappingFragment StoreEntitySet="WS_User_Roles">
-          <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+          <ScalarProperty Name="Role_Member" ColumnName="Role_Member" />
+          <ScalarProperty Name="Role_Manager" ColumnName="Role_Manager" />
+          <ScalarProperty Name="Role_Admin" ColumnName="Role_Admin" />
           <ScalarProperty Name="User_ID" ColumnName="User_ID" />
           <ScalarProperty Name="WorkSpace_ID" ColumnName="WorkSpace_ID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="RoleWorkSpaces">
-      <EntityTypeMapping TypeName="CapstoneProjectModelModel.RoleWorkSpace">
-        <MappingFragment StoreEntitySet="RoleWorkSpace">
-          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
