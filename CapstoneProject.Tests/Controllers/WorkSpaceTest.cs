@@ -125,5 +125,36 @@ namespace CapstoneProject.Tests.Controllers
 			//Assert.AreEqual("Home", redirectRoute.RouteValues["controller"]);
 			Assert.AreEqual(0, validationResults.Count);
 		}
+		[TestMethod]
+		public void DeleteWorkSpace(WorkSpace ws)
+		{
+			//Setup a fake HttpRequest
+			Mock<HttpContextBase> moqContext = new Mock<HttpContextBase>();
+			Mock<HttpRequestBase> moqRequest = new Mock<HttpRequestBase>();
+			Mock<HttpPostedFileBase> moqPostedFile = new Mock<HttpPostedFileBase>();
+
+			moqRequest.Setup(r => r.Files.Count).Returns(0);
+			moqContext.Setup(x => x.Request).Returns(moqRequest.Object);
+
+			//arrange 
+			var controller = new HomeController();
+			CapstoneProjectModelEntities db = new CapstoneProjectModelEntities();
+			ws.ID = 1;
+			var work_id = ws.ID;
+			WorkSpace workspace = db.WorkSpaces.Find(work_id);
+			db.WorkSpaces.Remove(workspace);
+
+			controller.ControllerContext = new ControllerContext(moqContext.Object, new RouteData(), controller);
+			var validationResults = TestModelHelper.ValidateModel(controller, workspace);
+
+			//act
+			var redirectRoute = controller.Index() as RedirectToRouteResult;
+
+			//assert
+			Assert.IsNotNull(redirectRoute);
+			Assert.AreEqual("Index", redirectRoute.RouteValues["action"]);
+			//Assert.AreEqual("Home", redirectRoute.RouteValues["controller"]);
+			Assert.AreEqual(0, validationResults.Count);
+		}
 	}
 }
