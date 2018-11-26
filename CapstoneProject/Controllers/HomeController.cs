@@ -51,11 +51,16 @@ namespace CapstoneProject.Controllers
         [HttpPost]
         public ActionResult CreateWorkSpace(WorkSpace ws)
         {
-            ws.Createdate = DateTime.Now;
-            //ws.Bilimail = Session["UserName"].ToString();
-            db.WorkSpaces.Add(ws);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+			if (!ws.Equals(null))
+			{
+				ws.Createdate = DateTime.Now;
+				//ws.Bilimail = Session["UserName"].ToString();
+				db.WorkSpaces.Add(ws);
+				db.SaveChanges();
+				return RedirectToAction("Index");
+			}
+			else
+				return View();
         }
 
         public ActionResult DeleteWorkSpace(WorkSpace ws)
