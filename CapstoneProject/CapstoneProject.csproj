@@ -8843,6 +8843,7 @@
     <Content Include="Content\build\scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Content\build\scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Content\build\scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\Home\EditRoleMemberWS.cshtml" />
     <None Include="Views\Shared\Layouts\footer.cshtml" />
     <None Include="Views\Shared\Layouts\header.cshtml" />
     <None Include="Views\Shared\Layouts\menu.cshtml" />

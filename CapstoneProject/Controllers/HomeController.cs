@@ -58,7 +58,8 @@ namespace CapstoneProject.Controllers
             string userid = User.Identity.GetUserId();
             Session["UserId"] = userid;
             wsp.User_ID = userid;
-            wsp.Role_ID = 4;
+            wsp.Role_Admin = true;
+            wsp.Role_Member = true;
             db.WS_User_Roles.Add(wsp);
             db.WorkSpaces.Add(ws);
             db.SaveChanges();
@@ -98,11 +99,11 @@ namespace CapstoneProject.Controllers
                 WS_User_Roles wsuser = new WS_User_Roles();
                 wsuser.User_ID = db.AspNetUsers.SingleOrDefault(x => x.Email == user).Id;
                 wsuser.WorkSpace_ID = wp.ID;
-                wsuser.Role_ID = 3;//3 là id của RoleWorkSpace
+                wsuser.Role_Member = true;
                 db.WS_User_Roles.Add(wsuser);
             }
             db.SaveChanges();
-            return RedirectToAction("ShowWorkSpace", new { id = model.ID });
+            return RedirectToAction("AddMemberWS", new { id = model.ID });
         }
 
         public ActionResult SettingWorkSpace(int? id)
@@ -124,7 +125,6 @@ namespace CapstoneProject.Controllers
         public ActionResult EditRoleMemberWS(int? id)
         {
             WS_User_Roles ws = db.WS_User_Roles.Find(id);
-            ViewBag.editrole = db.RoleWorkSpaces.OrderByDescending(x => x.ID).ToList();
             return View(ws);
         }
 
@@ -132,17 +132,9 @@ namespace CapstoneProject.Controllers
         public ActionResult EditRoleMemberWS(WS_User_Roles model, List<string> chk1)
         {
             WS_User_Roles wsp = db.WS_User_Roles.Find(model.ID);
-            //var roleuser = db.WS_User_Roles.Where(x => x.WorkSpace_ID == model.ID).ToList();
-            //db.WS_User_Roles.RemoveRange(roleuser);
-            //foreach (var fe in chk1)
-            //{
-            //    WS_User_Roles profe = new WS_User_Roles();
-            //    profe.Role_ID = db.RoleWorkSpaces.SingleOrDefault(x => x.RoleName == fe).ID;
-            //    profe.WorkSpace_ID = wsp.WorkSpace_ID;
-            //    db.WS_User_Roles.Add(profe);
-            //}
-
-            wsp.Role_ID = model.Role_ID;
+            wsp.Role_Admin = model.Role_Admin;
+            wsp.Role_Manager = model.Role_Manager;
+            wsp.Role_Member = model.Role_Member;
 
             db.Entry(wsp).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
