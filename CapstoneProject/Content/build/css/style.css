@@ -329,6 +329,23 @@ body {
   text-align: center;
 }
 
+.nav_title {
+  height: auto;
+}
+.nav_title .site_title {
+  padding: 10px;
+  height: auto;
+}
+.nav_title .site_title .small-logo {
+  width: 55px;
+  position: fixed;
+  top: 10px;
+  left: 7px;
+}
+.nav_title .site_title .medium-logo {
+  width: 45px;
+}
+
 .cw-header-light {
   font-family: "Segoe UI Light";
   font-weight: 100;

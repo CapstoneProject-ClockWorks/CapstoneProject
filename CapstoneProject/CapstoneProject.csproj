@@ -209,6 +209,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CWcommon.resx</DependentUpon>
     </Compile>
+    <Compile Include="Content\resources\CWgroup_create.vi.Designer.cs">
+      <DependentUpon>CWgroup_create.vi.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Content\resources\CWgroup_create.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CWgroup_create.resx</DependentUpon>
+    </Compile>
     <Compile Include="Content\resources\CWlogin.vi.Designer.cs">
       <DependentUpon>CWlogin.vi.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -223,6 +233,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CWlogin.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\resources\CWregister.vi.Designer.cs">
+      <DependentUpon>CWregister.vi.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Content\resources\CWregister.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CWregister.resx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -263,9 +283,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PMS_Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\RoleWorkSpace.cs">
-      <DependentUpon>PMS_Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>PMS_Model.tt</DependentUpon>
     </Compile>
@@ -303,6 +320,7 @@
     <Content Include="Content\images\forward_enabled.png" />
     <Content Include="Content\images\forward_enabled_hover.png" />
     <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\images\logo-big.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\user\avatar1.jpg" />
     <Content Include="Content\images\workspace\avatar1.jpg" />
@@ -8828,7 +8846,9 @@
     <None Include="Views\Shared\Layouts\footer.cshtml" />
     <None Include="Views\Shared\Layouts\header.cshtml" />
     <None Include="Views\Shared\Layouts\menu.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -8893,6 +8913,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CWcommon.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Content\resources\CWgroup_create.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CWgroup_create.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\resources\CWgroup_create.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CWgroup_create.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Content\resources\CWlogin.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CWlogin.vi.Designer.cs</LastGenOutput>
@@ -8908,6 +8936,14 @@
     <EmbeddedResource Include="Content\resources\CWlogin.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CWlogin.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\resources\CWregister.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CWregister.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\resources\CWregister.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CWregister.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

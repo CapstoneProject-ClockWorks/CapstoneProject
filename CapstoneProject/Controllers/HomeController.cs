@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CapstoneProject.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         CapstoneProjectModelEntities db = new CapstoneProjectModelEntities();
         public ActionResult Index()
