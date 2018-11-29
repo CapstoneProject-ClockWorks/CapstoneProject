@@ -13,7 +13,7 @@ namespace CapstoneProject.Controllers
 {
     public class HomeController : BaseController
     {
-        CapstoneProjectModelEntities db = new CapstoneProjectModelEntities();
+        PMSEntities db = new PMSEntities();
         public ActionResult Index()
         {
             string user = User.Identity.GetUserName();

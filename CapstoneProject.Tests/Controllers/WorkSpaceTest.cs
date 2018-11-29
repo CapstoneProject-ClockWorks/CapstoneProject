@@ -138,7 +138,7 @@ namespace CapstoneProject.Tests.Controllers
 
 			//arrange 
 			var controller = new HomeController();
-			CapstoneProjectModelEntities db = new CapstoneProjectModelEntities();
+            PMSEntities db = new PMSEntities();
 			ws.ID = 1;
 			var work_id = ws.ID;
 			WorkSpace workspace = db.WorkSpaces.Find(work_id);

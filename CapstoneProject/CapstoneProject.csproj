@@ -199,6 +199,18 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>PMS_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>PMS_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>PMS_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>PMS_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Content\resources\CWcommon.vi.Designer.cs">
       <DependentUpon>CWcommon.vi.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -264,18 +276,6 @@
     <Compile Include="Helpers\GlobalHelper.cs" />
     <Compile Include="Helpers\MultiLanguageViewEngine.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>PMS_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>PMS_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>PMS_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserLogin.cs">
-      <DependentUpon>PMS_Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PMS_Model.Context.cs">
@@ -293,15 +293,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PMS_Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>PMS_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WorkSpace.cs">
-      <DependentUpon>PMS_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WS_User_Roles.cs">
-      <DependentUpon>PMS_Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Content\resources\CWmenu1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -309,6 +300,12 @@
       <DependentUpon>CWmenu.resx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Models\WorkSpace.cs">
+      <DependentUpon>PMS_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WS_User_Roles.cs">
+      <DependentUpon>PMS_Model.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\build\css\custom.css" />
@@ -7663,28 +7660,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\PMS_Model.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PMS_Model.edmx</DependentUpon>
-      <LastGenOutput>PMS_Model.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\PMS_Model.edmx.sql" />
-    <Content Include="Models\PMS_Model.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PMS_Model.edmx</DependentUpon>
-      <LastGenOutput>PMS_Model.cs</LastGenOutput>
-    </Content>
     <Content Include="Content\build\scripts\bootstrap.js" />
     <Content Include="Content\build\scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EntityDeploy Include="Models\PMS_Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PMS_Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\PMS_Model.edmx.diagram">
-      <DependentUpon>PMS_Model.edmx</DependentUpon>
     </Content>
     <Content Include="Content\build\css\responsive.css.map" />
     <Content Include="Content\build\css\style.css.map" />
@@ -8854,7 +8833,24 @@
     <Content Include="Content\build\scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Content\build\scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Content\build\scripts\modernizr-2.8.3.js" />
+    <Content Include="Models\PMS_Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PMS_Model.edmx</DependentUpon>
+      <LastGenOutput>PMS_Model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\PMS_Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PMS_Model.edmx</DependentUpon>
+      <LastGenOutput>PMS_Model.cs</LastGenOutput>
+    </Content>
     <Content Include="Views\Home\EditRoleMemberWS.cshtml" />
+    <EntityDeploy Include="Models\PMS_Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PMS_Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\PMS_Model.edmx.diagram">
+      <DependentUpon>PMS_Model.edmx</DependentUpon>
+    </Content>
     <None Include="Views\Shared\Layouts\footer.cshtml" />
     <None Include="Views\Shared\Layouts\header.cshtml" />
     <None Include="Views\Shared\Layouts\menu.cshtml" />
