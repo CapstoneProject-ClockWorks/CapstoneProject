@@ -34,7 +34,7 @@ namespace CapstoneProject.Tests.Controllers
 			moqContext.Setup(x => x.Request).Returns(moqRequest.Object);
 
 			//arrange 
-			var controller = new HomeController();
+			var controller = new GroupController();
 			var workspace = new WorkSpace()
 			{
 				WorkSpaceName = "WorkSpace TestCorrect",
@@ -47,7 +47,7 @@ namespace CapstoneProject.Tests.Controllers
 			var validationResults = TestModelHelper.ValidateModel(controller, workspace);
 
 			//act
-			var redirectRoute = controller.CreateWorkSpace(workspace) as RedirectToRouteResult;
+			var redirectRoute = controller.CreateGroup(workspace) as RedirectToRouteResult;
 
 			//assert
 			Assert.IsNotNull(redirectRoute);

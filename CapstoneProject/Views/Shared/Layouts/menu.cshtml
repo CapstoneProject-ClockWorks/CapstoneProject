@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-          <a href="index.html" class="site_title"><img src="~/Content/images/logo.png" class="medium-logo" alt="Alternate Text" /> <span style="font-size: 11px;">Process Management System</span></a>
+          <a href="@Url.Action("Index","Home")" class="site_title"><img src="~/Content/images/logo.png" class="medium-logo" alt="Alternate Text" /> <span style="font-size: 11px;">Process Management System</span></a>
         </div>
     
         <div class="clearfix"></div>
@@ -25,7 +25,7 @@
           <div class="menu_section">
             <h3>General</h3>
             <ul class="nav side-menu">
-              <li><a><i class="fa fa-home"></i> @CapstoneProject.Content.resources.CWmenu.clockworks_menu_home</a>
+              <li><a href="@Url.Action("Index","Home")"><i class="fa fa-home"></i> @CapstoneProject.Content.resources.CWmenu.clockworks_menu_home</a>
                 @*<ul class="nav child_menu">
                   <li><a href="index.html">Dashboard</a></li>
                   <li><a href="index2.html">Dashboard2</a></li>

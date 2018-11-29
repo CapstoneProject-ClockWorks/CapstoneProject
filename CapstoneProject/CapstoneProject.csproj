@@ -199,6 +199,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>PMS_Model.tt</DependentUpon>
     </Compile>
@@ -8843,7 +8844,7 @@
       <DependentUpon>PMS_Model.edmx</DependentUpon>
       <LastGenOutput>PMS_Model.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Home\EditRoleMemberWS.cshtml" />
+    <Content Include="Views\Group\EditRoleMemberWS.cshtml" />
     <EntityDeploy Include="Models\PMS_Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PMS_Model.Designer.cs</LastGenOutput>
@@ -8851,6 +8852,7 @@
     <Content Include="Models\PMS_Model.edmx.diagram">
       <DependentUpon>PMS_Model.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\Group\Index.cshtml" />
     <None Include="Views\Shared\Layouts\footer.cshtml" />
     <None Include="Views\Shared\Layouts\header.cshtml" />
     <None Include="Views\Shared\Layouts\menu.cshtml" />
@@ -8890,10 +8892,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\CreateWorkSpace.cshtml" />
-    <Content Include="Views\Home\ShowWorkSpace.cshtml" />
-    <Content Include="Views\Home\SettingWorkSpace.cshtml" />
-    <Content Include="Views\Home\AddMemberWS.cshtml" />
+    <Content Include="Views\Group\CreateGroup.cshtml" />
+    <Content Include="Views\Group\ShowGroup.cshtml" />
+    <Content Include="Views\Group\SettingGroup.cshtml" />
+    <Content Include="Views\Group\AddMemberWS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
