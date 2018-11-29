@@ -199,6 +199,19 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>PMS_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>PMS_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>PMS_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>PMS_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Content\resources\CWcommon.vi.Designer.cs">
       <DependentUpon>CWcommon.vi.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -208,6 +221,26 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CWcommon.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\resources\CWgroup_create.vi.Designer.cs">
+      <DependentUpon>CWgroup_create.vi.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Content\resources\CWgroup_create.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CWgroup_create.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\resources\CWhome.vi.Designer.cs">
+      <DependentUpon>CWhome.vi.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Content\resources\CWhome.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CWhome.resx</DependentUpon>
     </Compile>
     <Compile Include="Content\resources\CWlogin.vi.Designer.cs">
       <DependentUpon>CWlogin.vi.resx</DependentUpon>
@@ -224,6 +257,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CWlogin.resx</DependentUpon>
     </Compile>
+    <Compile Include="Content\resources\CWregister.vi.Designer.cs">
+      <DependentUpon>CWregister.vi.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Content\resources\CWregister.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CWregister.resx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -234,18 +277,6 @@
     <Compile Include="Helpers\GlobalHelper.cs" />
     <Compile Include="Helpers\MultiLanguageViewEngine.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>PMS_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>PMS_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>PMS_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserLogin.cs">
-      <DependentUpon>PMS_Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PMS_Model.Context.cs">
@@ -263,15 +294,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PMS_Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>PMS_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WorkSpace.cs">
-      <DependentUpon>PMS_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WS_User_Roles.cs">
-      <DependentUpon>PMS_Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Content\resources\CWmenu1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -279,6 +301,12 @@
       <DependentUpon>CWmenu.resx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Models\WorkSpace.cs">
+      <DependentUpon>PMS_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WS_User_Roles.cs">
+      <DependentUpon>PMS_Model.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\build\css\custom.css" />
@@ -300,6 +328,7 @@
     <Content Include="Content\images\forward_enabled.png" />
     <Content Include="Content\images\forward_enabled_hover.png" />
     <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\images\logo-big.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\user\avatar1.jpg" />
     <Content Include="Content\images\workspace\avatar1.jpg" />
@@ -7632,27 +7661,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\PMS_Model.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PMS_Model.edmx</DependentUpon>
-      <LastGenOutput>PMS_Model.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\PMS_Model.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PMS_Model.edmx</DependentUpon>
-      <LastGenOutput>PMS_Model.cs</LastGenOutput>
-    </Content>
     <Content Include="Content\build\scripts\bootstrap.js" />
     <Content Include="Content\build\scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EntityDeploy Include="Models\PMS_Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PMS_Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\PMS_Model.edmx.diagram">
-      <DependentUpon>PMS_Model.edmx</DependentUpon>
     </Content>
     <Content Include="Content\build\css\responsive.css.map" />
     <Content Include="Content\build\css\style.css.map" />
@@ -8822,11 +8834,31 @@
     <Content Include="Content\build\scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Content\build\scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Content\build\scripts\modernizr-2.8.3.js" />
-    <Content Include="Views\Home\EditRoleMemberWS.cshtml" />
+    <Content Include="Models\PMS_Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PMS_Model.edmx</DependentUpon>
+      <LastGenOutput>PMS_Model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\PMS_Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PMS_Model.edmx</DependentUpon>
+      <LastGenOutput>PMS_Model.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Group\EditRoleMemberWS.cshtml" />
+    <EntityDeploy Include="Models\PMS_Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PMS_Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\PMS_Model.edmx.diagram">
+      <DependentUpon>PMS_Model.edmx</DependentUpon>
+    </Content>
+    <Content Include="Views\Group\Index.cshtml" />
     <None Include="Views\Shared\Layouts\footer.cshtml" />
     <None Include="Views\Shared\Layouts\header.cshtml" />
     <None Include="Views\Shared\Layouts\menu.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -8860,10 +8892,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\CreateWorkSpace.cshtml" />
-    <Content Include="Views\Home\ShowWorkSpace.cshtml" />
-    <Content Include="Views\Home\SettingWorkSpace.cshtml" />
-    <Content Include="Views\Home\AddMemberWS.cshtml" />
+    <Content Include="Views\Group\CreateGroup.cshtml" />
+    <Content Include="Views\Group\ShowGroup.cshtml" />
+    <Content Include="Views\Group\SettingGroup.cshtml" />
+    <Content Include="Views\Group\AddMemberWS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
@@ -8892,6 +8924,22 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CWcommon.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Content\resources\CWgroup_create.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CWgroup_create.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\resources\CWgroup_create.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CWgroup_create.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\resources\CWhome.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CWhome.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\resources\CWhome.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CWhome.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Content\resources\CWlogin.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CWlogin.vi.Designer.cs</LastGenOutput>
@@ -8907,6 +8955,14 @@
     <EmbeddedResource Include="Content\resources\CWlogin.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CWlogin.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\resources\CWregister.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CWregister.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\resources\CWregister.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CWregister.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

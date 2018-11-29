@@ -1,0 +1,30 @@
+﻿@using CapstoneProject.Models;
+@model IEnumerable<CapstoneProject.Models.WorkSpace>
+
+@{
+    ViewBag.Title = "Home Page";
+    string name = Session["UserName"].ToString();
+}
+<div style="float:right"><a href="@Url.Action("CreateGroup","Group")" class="btn btn-success">Create Group</a></div>
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>@CapstoneProject.Content.resources.CWhome.clockworks_home_table_workspacename</th>
+            <th>Discription</th>
+            <th>Bilimail</th>
+            <th>Create date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Where(x => x.Bilimail == name))
+        {
+            <tr>
+                <td>@Html.ActionLink(item.WorkSpaceName, "ShowGroup", new { id = item.ID })</td>
+                <td>@Html.DisplayFor(modle => item.Description)</td>
+                <td>@Html.DisplayFor(model => item.Bilimail)</td>
+                <td>@Html.DisplayFor(modle => item.Createdate)</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
