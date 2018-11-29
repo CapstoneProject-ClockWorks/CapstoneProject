@@ -219,6 +219,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CWgroup_create.resx</DependentUpon>
     </Compile>
+    <Compile Include="Content\resources\CWhome.vi.Designer.cs">
+      <DependentUpon>CWhome.vi.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Content\resources\CWhome.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CWhome.resx</DependentUpon>
+    </Compile>
     <Compile Include="Content\resources\CWlogin.vi.Designer.cs">
       <DependentUpon>CWlogin.vi.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -7658,6 +7668,7 @@
       <DependentUpon>PMS_Model.edmx</DependentUpon>
       <LastGenOutput>PMS_Model.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\PMS_Model.edmx.sql" />
     <Content Include="Models\PMS_Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PMS_Model.edmx</DependentUpon>
@@ -8921,6 +8932,14 @@
     <EmbeddedResource Include="Content\resources\CWgroup_create.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CWgroup_create.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\resources\CWhome.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CWhome.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\resources\CWhome.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CWhome.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Content\resources\CWlogin.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
