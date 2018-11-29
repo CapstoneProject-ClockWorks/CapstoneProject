@@ -109,7 +109,7 @@ namespace CapstoneProject.Tests.Controllers
 			var ws_user_roles = new WS_User_Roles()
 			{
 				WorkSpace_ID = 1,
-				Role_ID = 3,
+				Role_Admin = true,
 				User_ID = "",
 			};
 

@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CapstoneProject.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         CapstoneProjectModelEntities db = new CapstoneProjectModelEntities();
         public ActionResult Index()
@@ -51,8 +51,21 @@ namespace CapstoneProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateWorkSpace(WorkSpace ws)
+        public ActionResult CreateWorkSpace(WorkSpace ws, HttpPostedFileBase ImageWS)
         {
+            if (ImageWS != null)
+            {
+                string avatar = "";
+                if (ImageWS.ContentLength > 0)
+                {
+                    var filename = Path.GetFileName(ImageWS.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Images/"), filename);
+                    ImageWS.SaveAs(path);
+                    avatar = filename;
+                }
+                ws.ImageWS = avatar;
+            }
+
             ws.Createdate = DateTime.Now;
             WS_User_Roles wsp = new WS_User_Roles();
             string userid = User.Identity.GetUserId();
@@ -64,11 +77,15 @@ namespace CapstoneProject.Controllers
             db.WorkSpaces.Add(ws);
             db.SaveChanges();
             return RedirectToAction("Index");
+
+
         }
 
         public ActionResult DeleteWorkSpace(WorkSpace ws)
         {
             WorkSpace worksp = db.WorkSpaces.Find(ws.ID);
+            var iduser = db.WS_User_Roles.Where(x => x.WorkSpace_ID == ws.ID);
+            db.WS_User_Roles.RemoveRange(iduser);
             db.WorkSpaces.Remove(worksp);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -87,6 +104,7 @@ namespace CapstoneProject.Controllers
         public ActionResult AddMemberWS(int? id)
         {
             WorkSpace addmem = db.WorkSpaces.Find(id);
+            ViewBag.listuser = db.AspNetUsers.OrderByDescending(x => x.Id).ToList();
             return View(addmem);
         }
 
@@ -94,15 +112,32 @@ namespace CapstoneProject.Controllers
         public ActionResult AddMemberWS(WorkSpace model, List<string> adduser)
         {
             WorkSpace wp = db.WorkSpaces.Find(model.ID);
+            //var idwp = db.WS_User_Roles.Where(x => x.WorkSpace_ID == model.ID);
+            //db.WS_User_Roles.RemoveRange(idwp);
             foreach (var user in adduser)
             {
                 WS_User_Roles wsuser = new WS_User_Roles();
-                wsuser.User_ID = db.AspNetUsers.SingleOrDefault(x => x.Email == user).Id;
-                wsuser.WorkSpace_ID = wp.ID;
-                wsuser.Role_Member = true;
-                db.WS_User_Roles.Add(wsuser);
+                var id = db.AspNetUsers.SingleOrDefault(x => x.Id == user);
+                var rs = db.WS_User_Roles.ToList();
+                foreach (var item in rs)
+                {
+                    if (item.User_ID.Equals(id) == true)
+                    {
+
+                    }
+                    else
+                    {
+                        wsuser.User_ID = db.AspNetUsers.SingleOrDefault(x => x.Email == user).Id;
+
+                        wsuser.WorkSpace_ID = wp.ID;
+                        wsuser.Role_Member = true;
+                        db.WS_User_Roles.Add(wsuser);
+                        db.SaveChanges();
+                    }
+                }
+
             }
-            db.SaveChanges();
+
             return RedirectToAction("AddMemberWS", new { id = model.ID });
         }
 

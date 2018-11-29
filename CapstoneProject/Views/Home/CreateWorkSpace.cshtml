@@ -9,7 +9,7 @@
 <h2>CreateWorkSpace</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateWorkSpace", "Home",FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -35,7 +35,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Bilimail, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Bilimail, new { htmlAttributes = new { @class = "form-control", @Value = name, @Readonly= "readonly" } })
+                @Html.EditorFor(model => model.Bilimail, new { htmlAttributes = new { @class = "form-control", @Value = name, @Readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.Bilimail, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -43,8 +43,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ImageWS, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ImageWS, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.ImageWS, new { htmlAttributes = new { @class = "form-control" } })*@
+
+                <div class="img-picker"><div class="form-control btn btn-default btn-block img-upload-btn"><input type="file" class="imgin" name="ImageWS" id="ImageWS"></div></div>
                 @Html.ValidationMessageFor(model => model.ImageWS, "", new { @class = "text-danger" })
+
             </div>
         </div>
 
@@ -54,6 +57,7 @@
             </div>
         </div>
     </div>
+
 }
 
 <div>
@@ -63,3 +67,45 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script>
+    function readURL(input, img) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $(img).attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(".imgin").click(function () {
+
+        //$(this).children("form-control").add("<button class='' style='font-weight: normal;'>Remove</button>")
+        $(this).change(function () {
+            $(this).siblings("i").remove();
+            $(this).siblings(".img222").remove();
+
+            $(this).parent(".form-control").prepend("<img class='img-responsive img-rounded img222' style='height:70% ;position:absolute;top:0px;left:0px'/>");
+
+
+            $(this).siblings(".img222").after("<button type='button' class='btn btn-danger' style='font-weight: bold; width:100%; height:30%; position:absolute;top:70%;left:0'>Remove</button>");
+            readURL(this, $(this).siblings(".img222"));
+            $(this).hide();
+            $(this).siblings(".btn").click(function () {
+                $(this).parent(".form-control").children(".img222").remove();
+                $(this).parent(".form-control").children(".imgin").show();
+                $(this).parent(".form-control").children(".imgin").val(null);
+                $(this).parent(".form-control").prepend("<i class='glyphicon glyphicon-plus'></i>");
+                $(this).parent(".form-control").children(".btn").remove();
+            });
+        });
+
+
+    });
+
+
+
+
+</script>
