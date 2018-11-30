@@ -21,6 +21,7 @@ namespace CapstoneProject.Models
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.WS_User_Roles = new HashSet<WS_User_Roles>();
             this.AspNetRoles = new HashSet<AspNetRole>();
+            this.WorkSpaces = new HashSet<WorkSpace>();
         }
     
         public string Id { get; set; }
@@ -44,5 +45,7 @@ namespace CapstoneProject.Models
         public virtual ICollection<WS_User_Roles> WS_User_Roles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkSpace> WorkSpaces { get; set; }
     }
 }

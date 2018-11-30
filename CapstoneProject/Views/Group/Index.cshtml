@@ -11,17 +11,15 @@
         <tr>
             <th>@CapstoneProject.Content.resources.CWhome.clockworks_home_table_workspacename</th>
             <th>Discription</th>
-            <th>Bilimail</th>
             <th>Create date</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Where(x => x.Bilimail == name))
+        @foreach (var item in Model.Where(x => x.User_ID == name))
         {
             <tr>
                 <td>@Html.ActionLink(item.WorkSpaceName, "ShowGroup", new { id = item.ID })</td>
                 <td>@Html.DisplayFor(modle => item.Description)</td>
-                <td>@Html.DisplayFor(model => item.Bilimail)</td>
                 <td>@Html.DisplayFor(modle => item.Createdate)</td>
             </tr>
         }
