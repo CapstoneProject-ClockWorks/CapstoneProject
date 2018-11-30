@@ -4,18 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7114ee59c69f4403a70da204c1ef529f" Name="Diagram1">
+      <Diagram DiagramId="7114ee59c69f4403a70da204c1ef529f" Name="Diagram1" ZoomLevel="84">
         <EntityTypeShape EntityType="cap21t8Model.AspNetRole" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="cap21t8Model.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="cap21t8Model.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="cap21t8Model.AspNetUser" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="cap21t8Model.WorkSpace" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="cap21t8Model.WS_User_Roles" Width="1.5" PointX="8.25" PointY="5.625" IsExpanded="true" />
         <AssociationConnector Association="cap21t8Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="cap21t8Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="cap21t8Model.FK_WS_User_Roles_AspNetUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="cap21t8Model.FK_WS_User_Roles_WorkSpace" ManuallyRouted="false" />
         <AssociationConnector Association="cap21t8Model.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="cap21t8Model.WorkSpace" Width="1.5" PointX="5.25" PointY="10.75" />
+        <AssociationConnector Association="cap21t8Model.FK_WorkSpace_AspNetUsers" />
+        <AssociationConnector Association="cap21t8Model.FK_WS_User_Roles_WorkSpace" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

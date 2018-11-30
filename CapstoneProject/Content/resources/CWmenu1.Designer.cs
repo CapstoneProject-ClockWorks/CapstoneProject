@@ -61,6 +61,15 @@ namespace CapstoneProject.Content.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Group.
+        /// </summary>
+        public static string clockworks_menu_group {
+            get {
+                return ResourceManager.GetString("clockworks_menu_group", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string clockworks_menu_home {
