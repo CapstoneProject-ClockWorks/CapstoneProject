@@ -5,12 +5,16 @@
 @{
     ViewBag.Title = "AddMemberWS";
     Layout = "~/Views/Shared/_Layout.cshtml";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 68b0dabe114be131269b39a27e58acde7e186b47
     var db = new PMSEntities();
     var rs = db.WS_User_Roles.ToList();
 
 }
 
+<<<<<<< HEAD
 
 
 <h2>@Html.DisplayFor(model => model.WorkSpace.WorkSpaceName)</h2>
@@ -27,6 +31,8 @@
     </li>
 </ul>
 
+=======
+>>>>>>> 68b0dabe114be131269b39a27e58acde7e186b47
 @using (Html.BeginForm("AddMemberWS", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()

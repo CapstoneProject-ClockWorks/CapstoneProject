@@ -11,17 +11,27 @@
         <tr>
             <th>@CapstoneProject.Content.resources.CWhome.clockworks_home_table_workspacename</th>
             <th>Discription</th>
+<<<<<<< HEAD
             <th>Author</th>
+=======
+>>>>>>> 68b0dabe114be131269b39a27e58acde7e186b47
             <th>Create date</th>
         </tr>
     </thead>
     <tbody>
+<<<<<<< HEAD
         @foreach (var item in Model)
+=======
+        @foreach (var item in Model.Where(x => x.User_ID == name))
+>>>>>>> 68b0dabe114be131269b39a27e58acde7e186b47
         {
             <tr>
                 <td>@Html.ActionLink(item.WorkSpaceName, "ShowGroup", new { id = item.ID })</td>
                 <td>@Html.DisplayFor(modle => item.Description)</td>
+<<<<<<< HEAD
                 <td>@Html.DisplayFor(model => item.AspNetUser.Email)</td>
+=======
+>>>>>>> 68b0dabe114be131269b39a27e58acde7e186b47
                 <td>@Html.DisplayFor(modle => item.Createdate)</td>
             </tr>
         }

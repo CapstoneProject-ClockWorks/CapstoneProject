@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<<<<<<< HEAD
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <h2>@CapstoneProject.Content.resources.CWgroup_create.clockworks_group_create_title.</h2>
@@ -52,6 +53,56 @@
         </div>
     </div>
 }
+=======
+    <div class="cw-title">Sign up your workspace</div>
+    <ol class="cw-steps">
+        <li class="current">
+            <i class="fas fa-briefcase"></i>
+            <strong class="cw-step">Step 1:</strong>Set up your workspace
+        </li>
+        <li>
+            <i class="fas fa-user-plus"></i>
+            <strong class="cw-step">Step 2:</strong>Invite Members
+        </li>
+    </ol>
+    <div class="cw-create-workspace">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <h2 class="cw-header-light">Create your workspace right away!!</h2>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group row">
+                @Html.LabelFor(model => model.WorkSpaceName, htmlAttributes: new { @class = "control-label col-md-2 cw-required" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.WorkSpaceName, new { htmlAttributes = new { @class = "form-control", @Required = "required" } })
+                    @Html.ValidationMessageFor(model => model.WorkSpaceName, "", new { @class = "text-danger" })
+                    <span class="cw-hint">This will be your workspace name on our website</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.ImageWS, htmlAttributes: new { @class = "control-label col-md-2 cw-required" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ImageWS, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ImageWS, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @Required = "required" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    <span class="cw-hint">Describe your workspace that you want to establish</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-success">@CapstoneProject.Content.resources.CWgroup_create.clockworks_group_create_button</button>
+                </div>
+            </div>
+        }
+    </div>
+
+>>>>>>> 68b0dabe114be131269b39a27e58acde7e186b47
 
 <div>
     @Html.ActionLink("Back to List", "Index")
