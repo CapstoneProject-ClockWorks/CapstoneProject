@@ -5,15 +5,29 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>SettingWorkSpace</h2>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-@using (Html.BeginForm())
+<h2>@Html.DisplayFor(model => model.WorkSpaceName)</h2>
+
+<ul class="cw-tabs">
+    <li  rel="process">
+        <i class="fas fa-sitemap">@Html.ActionLink("Processes", "ShowGroup", new { id = Model.ID })</i>&nbsp;
+    </li>
+    <li rel="members">
+        <i class="fas fa-user-friends">@Html.ActionLink("Members", "AddMemberWS", new { id = Model.ID })</i>&nbsp;
+    </li>
+    <li class="cw-active-tab" rel="settings">
+        <i class="fas fa-cog">@Html.ActionLink("Settings", "SettingGroup", new { id = Model.ID })</i>&nbsp;
+    </li>
+</ul>
+
+
+@using (Html.BeginForm("SettingGroup", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>WorkSpace</h4>
-        <hr />
+        <br />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
 
@@ -33,6 +47,20 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageWS, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-default btn-file">
+                        Choose image <input type="file" name="ImageWS" id="imgInp">
+                    </span>
+                </span>
+                <input type="text" class="form-control" name="ImageWS" readonly value="@Html.ValueFor(m => m.ImageWS)">
+            </div>
+            <img style="width: 200px;height: auto" id='img-upload' />
+            @Html.ValidationMessageFor(model => model.ImageWS, "", new { @class = "text-danger" })
+        </div>
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -43,8 +71,45 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Delete", "DeleteGroup", new { id = Model.ID })
 </div>
-<div>
-    @Html.ActionLink("Delete", "DeleteWorkSpace", new { id = Model.ID })
-</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $(document).on('change', '.btn-file :file', function () {
+            var input = $(this),
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [label]);
+        });
+
+        $('.btn-file :file').on('fileselect', function (event, label) {
+
+            var input = $(this).parents('.input-group').find(':text'),
+                log = label;
+
+            if (input.length) {
+                input.val(log);
+            } else {
+                if (log) alert(log);
+            }
+
+        });
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img-upload').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgInp").change(function () {
+            readURL(this);
+        });
+    });
+</script>

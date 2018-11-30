@@ -6,18 +6,17 @@
     var db = new PMSEntities();
 }
 
-<h2>ShowWorkSpace</h2>
 <h2>@Html.DisplayFor(model => model.WorkSpaceName)</h2>
 
 <ul class="cw-tabs">
     <li class="cw-active-tab" rel="process">
-        <i class="fas fa-sitemap">@Html.ActionLink("Processes", "ShowWorkSpace", new { id = Model.ID })</i>&nbsp;
+        <i class="fas fa-sitemap">@Html.ActionLink("Processes", "ShowGroup", new { id = Model.ID })</i>&nbsp;
     </li>
     <li rel="members">
         <i class="fas fa-user-friends">@Html.ActionLink("Members", "AddMemberWS",new { id = Model.ID })</i>&nbsp;
     </li>
     <li rel="settings">
-        <i class="fas fa-cog">@Html.ActionLink("Settings", "SettingWorkSpace", new { id = Model.ID })</i>&nbsp;
+        <i class="fas fa-cog">@Html.ActionLink("Settings", "SettingGroup", new { id = Model.ID })</i>&nbsp;
     </li>
 </ul>
 

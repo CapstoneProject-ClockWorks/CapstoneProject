@@ -1,26 +1,37 @@
-﻿@model CapstoneProject.Models.WorkSpace
+﻿@model CapstoneProject.Models.WS_User_Roles
 
 @using CapstoneProject.Models
 
 @{
     ViewBag.Title = "AddMemberWS";
     Layout = "~/Views/Shared/_Layout.cshtml";
-<<<<<<< HEAD:CapstoneProject/Views/Home/AddMemberWS.cshtml
-    var db = new CapstoneProjectModelEntities();
-    var rs = db.WS_User_Roles.ToList();
-=======
+
     var db = new PMSEntities();
->>>>>>> 01da5a41649de82467529688bf5d5d87b897f9db:CapstoneProject/Views/Group/AddMemberWS.cshtml
+    var rs = db.WS_User_Roles.ToList();
 
 }
 
-@using (Html.BeginForm("AddMemberWS", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+
+<h2>@Html.DisplayFor(model => model.WorkSpace.WorkSpaceName)</h2>
+
+<ul class="cw-tabs">
+    <li rel="process">
+        <i class="fas fa-sitemap">@Html.ActionLink("Processes", "ShowGroup", new { id = Model.ID })</i>&nbsp;
+    </li>
+    <li class="cw-active-tab" rel="members">
+        <i class="fas fa-user-friends">@Html.ActionLink("Members", "AddMemberWS", new { id = Model.WorkSpace_ID })</i>&nbsp;
+    </li>
+    <li rel="settings">
+        <i class="fas fa-cog">@Html.ActionLink("Settings", "SettingGroup", new { id = Model.WorkSpace_ID })</i>&nbsp;
+    </li>
+</ul>
+
+@using (Html.BeginForm("AddMemberWS", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.ID)
-
-    <h2>AddMemberWS</h2>
 
 
     <div class="input-group">
@@ -36,13 +47,14 @@
 
             }
         </div>
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.WS_User., "Role_ID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("User_ID", new SelectList(ViewBag.listuser, "Id", "Email", Model.WS_User_Roles), new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model., "", new { @class = "text-danger" })
+        @Html.DropDownListFor(m => m.User_ID, new SelectList(db.AspNetUsers, "Id", "Email"), new { @class = "input-group select2cbx" })
+        <div class="control-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Input Tags</label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+                <input id="tags_1" type="text" class="tags form-control" value="social, adverts, sales" />
+                <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
             </div>
-        </div>*@
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -108,3 +120,5 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<link href="~/Content/css_select2/select2.min.css" rel="stylesheet" />
+<script src="~/Content/js_select2/select2.min.js"></script>

@@ -23,10 +23,11 @@ namespace CapstoneProject.Models
         public int ID { get; set; }
         public string WorkSpaceName { get; set; }
         public string Description { get; set; }
-        public string Bilimail { get; set; }
+        public string User_ID { get; set; }
         public string ImageWS { get; set; }
         public Nullable<System.DateTime> Createdate { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WS_User_Roles> WS_User_Roles { get; set; }
     }

@@ -18,8 +18,6 @@ namespace CapstoneProject.Controllers
         // GET: Group
         public ActionResult Index()
         {
-            string user = User.Identity.GetUserName();
-            Session["UserName"] = user;
             var viewlistworkspace = db.WorkSpaces.OrderByDescending(m => m.ID).ToList();
             return View(viewlistworkspace);
         }
@@ -27,8 +25,8 @@ namespace CapstoneProject.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                string user = User.Identity.GetUserName();
-                Session["UserName"] = user;
+                string user = User.Identity.GetUserId();
+                Session["UserID"] = user;
                 return View();
             }
             else
@@ -38,12 +36,25 @@ namespace CapstoneProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateGroup(WorkSpace ws)
+        public ActionResult CreateGroup(WorkSpace ws, HttpPostedFileBase ImageWS)
         {
-            ws.Createdate = DateTime.Now;
-            WS_User_Roles wsp = new WS_User_Roles();
             string userid = User.Identity.GetUserId();
             Session["UserId"] = userid;
+            if (ImageWS != null)
+            {
+                string avatar = "";
+                if (ImageWS.ContentLength > 0)
+                {
+                    var filename = Path.GetFileName(ImageWS.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Images/"), filename);
+                    ImageWS.SaveAs(path);
+                    avatar = filename;
+                }
+                ws.ImageWS = avatar;
+            }
+            ws.Createdate = DateTime.Now;
+            ws.User_ID = userid;
+            WS_User_Roles wsp = new WS_User_Roles();
             wsp.User_ID = userid;
             wsp.Role_Admin = true;
             wsp.Role_Member = true;
@@ -56,6 +67,8 @@ namespace CapstoneProject.Controllers
         public ActionResult DeleteGroup(WorkSpace ws)
         {
             WorkSpace worksp = db.WorkSpaces.Find(ws.ID);
+            var iduser = db.WS_User_Roles.Where(x => x.WorkSpace_ID == ws.ID);
+            db.WS_User_Roles.RemoveRange(iduser);
             db.WorkSpaces.Remove(worksp);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -73,7 +86,8 @@ namespace CapstoneProject.Controllers
 
         public ActionResult AddMemberWS(int? id)
         {
-            WorkSpace addmem = db.WorkSpaces.Find(id);
+            WS_User_Roles addmem = db.WS_User_Roles.Find(id);
+            ViewBag.user = db.AspNetUsers.OrderByDescending(x => x.Id).ToList();
             return View(addmem);
         }
 
@@ -100,13 +114,25 @@ namespace CapstoneProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult SettingGroup(WorkSpace model)
+        public ActionResult SettingGroup(WorkSpace model, HttpPostedFileBase ImageWS)
         {
             WorkSpace ws = db.WorkSpaces.Find(model.ID);
-            ws.WorkSpaceName = model.WorkSpaceName;
+            if (ImageWS != null)
+            {
+                string avatar = "";
+                if (ImageWS.ContentLength > 0)
+                {
+                    var filename = Path.GetFileName(ImageWS.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Images/"), filename);
+                    ImageWS.SaveAs(path);
+                    avatar = filename;
+                }
+                ws.ImageWS = avatar;
+            }
             ws.Description = model.Description;
+            ws.WorkSpaceName = model.WorkSpaceName;
             db.SaveChanges();
-            return RedirectToAction("ShowWorkSpace", new { id = model.ID });
+            return RedirectToAction("ShowGroup", new { id = model.ID });
         }
 
         public ActionResult EditRoleMemberWS(int? id)

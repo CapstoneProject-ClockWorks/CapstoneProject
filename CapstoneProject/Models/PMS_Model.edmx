@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="cap21t8Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="cap21t8Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -63,7 +63,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WorkSpaceName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Bilimail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ImageWS" Type="nvarchar(max)" />
           <Property Name="Createdate" Type="date" />
         </EntityType>
@@ -134,6 +134,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WorkSpace_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="WorkSpace" Type="Self.WorkSpace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkSpace">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_WS_User_Roles_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="WS_User_Roles" Type="Self.WS_User_Roles" Multiplicity="*" />
@@ -182,6 +194,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_WorkSpace_AspNetUsers" Association="Self.FK_WorkSpace_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="WorkSpace" EntitySet="WorkSpace" />
+          </AssociationSet>
           <AssociationSet Name="FK_WS_User_Roles_AspNetUsers" Association="Self.FK_WS_User_Roles_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="WS_User_Roles" EntitySet="WS_User_Roles" />
@@ -191,8 +207,7 @@
             <End Role="WS_User_Roles" EntitySet="WS_User_Roles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="cap21t8Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -245,18 +260,7 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="WS_User_Roles" Relationship="Self.FK_WS_User_Roles_AspNetUsers" FromRole="AspNetUsers" ToRole="WS_User_Roles" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-        </EntityType>
-        <EntityType Name="WorkSpace">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="WorkSpaceName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Bilimail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ImageWS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Createdate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="WS_User_Roles" Relationship="Self.FK_WS_User_Roles_WorkSpace" FromRole="WorkSpace" ToRole="WS_User_Roles" />
+          <NavigationProperty Name="WorkSpaces" Relationship="cap21t8Model.FK_WorkSpace_AspNetUsers" FromRole="AspNetUser" ToRole="WorkSpace" />
         </EntityType>
         <EntityType Name="WS_User_Roles">
           <Key>
@@ -269,7 +273,7 @@
           <Property Name="Role_Manager" Type="Boolean" />
           <Property Name="Role_Member" Type="Boolean" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_WS_User_Roles_AspNetUsers" FromRole="WS_User_Roles" ToRole="AspNetUsers" />
-          <NavigationProperty Name="WorkSpace" Relationship="Self.FK_WS_User_Roles_WorkSpace" FromRole="WS_User_Roles" ToRole="WorkSpace" />
+          <NavigationProperty Name="WorkSpace" Relationship="cap21t8Model.FK_WS_User_Roles_WorkSpace" FromRole="WS_User_Roles" ToRole="WorkSpace" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -311,18 +315,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_WS_User_Roles_WorkSpace">
-          <End Role="WorkSpace" Type="Self.WorkSpace" Multiplicity="1" />
-          <End Role="WS_User_Roles" Type="Self.WS_User_Roles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WorkSpace">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="WS_User_Roles">
-              <PropertyRef Name="WorkSpace_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
@@ -332,7 +324,6 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="WorkSpaces" EntityType="Self.WorkSpace" />
           <EntitySet Name="WS_User_Roles" EntityType="Self.WS_User_Roles" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -346,15 +337,57 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="WS_User_Roles" EntitySet="WS_User_Roles" />
           </AssociationSet>
-          <AssociationSet Name="FK_WS_User_Roles_WorkSpace" Association="Self.FK_WS_User_Roles_WorkSpace">
-            <End Role="WorkSpace" EntitySet="WorkSpaces" />
-            <End Role="WS_User_Roles" EntitySet="WS_User_Roles" />
-          </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="WorkSpaces" EntityType="cap21t8Model.WorkSpace" />
+          <AssociationSet Name="FK_WorkSpace_AspNetUsers" Association="cap21t8Model.FK_WorkSpace_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="WorkSpace" EntitySet="WorkSpaces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WS_User_Roles_WorkSpace" Association="cap21t8Model.FK_WS_User_Roles_WorkSpace">
+            <End Role="WorkSpace" EntitySet="WorkSpaces" />
+            <End Role="WS_User_Roles" EntitySet="WS_User_Roles" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="WorkSpace">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkSpaceName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="User_ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ImageWS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Createdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="AspNetUser" Relationship="cap21t8Model.FK_WorkSpace_AspNetUsers" FromRole="WorkSpace" ToRole="AspNetUser" />
+          <NavigationProperty Name="WS_User_Roles" Relationship="cap21t8Model.FK_WS_User_Roles_WorkSpace" FromRole="WorkSpace" ToRole="WS_User_Roles" />
+        </EntityType>
+        <Association Name="FK_WorkSpace_AspNetUsers">
+          <End Type="cap21t8Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="cap21t8Model.WorkSpace" Role="WorkSpace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkSpace">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WS_User_Roles_WorkSpace">
+          <End Type="cap21t8Model.WorkSpace" Role="WorkSpace" Multiplicity="1" />
+          <End Type="cap21t8Model.WS_User_Roles" Role="WS_User_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkSpace">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WS_User_Roles">
+              <PropertyRef Name="WorkSpace_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -406,18 +439,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="WorkSpaces">
-            <EntityTypeMapping TypeName="cap21t8Model.WorkSpace">
-              <MappingFragment StoreEntitySet="WorkSpace">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="WorkSpaceName" ColumnName="WorkSpaceName" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Bilimail" ColumnName="Bilimail" />
-                <ScalarProperty Name="ImageWS" ColumnName="ImageWS" />
-                <ScalarProperty Name="Createdate" ColumnName="Createdate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="WS_User_Roles">
             <EntityTypeMapping TypeName="cap21t8Model.WS_User_Roles">
               <MappingFragment StoreEntitySet="WS_User_Roles">
@@ -438,6 +459,18 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="WorkSpaces">
+            <EntityTypeMapping TypeName="cap21t8Model.WorkSpace">
+              <MappingFragment StoreEntitySet="WorkSpace">
+                <ScalarProperty Name="Createdate" ColumnName="Createdate" />
+                <ScalarProperty Name="ImageWS" ColumnName="ImageWS" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="WorkSpaceName" ColumnName="WorkSpaceName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
