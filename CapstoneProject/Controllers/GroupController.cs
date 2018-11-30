@@ -86,7 +86,7 @@ namespace CapstoneProject.Controllers
 
         public ActionResult AddMemberWS(int? id)
         {
-            WS_User_Roles addmem = db.WS_User_Roles.Find(id);
+            WorkSpace addmem = db.WorkSpaces.Find(id);
             ViewBag.user = db.AspNetUsers.OrderByDescending(x => x.Id).ToList();
             return View(addmem);
         }

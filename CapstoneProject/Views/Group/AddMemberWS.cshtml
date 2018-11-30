@@ -1,38 +1,33 @@
-﻿@model CapstoneProject.Models.WS_User_Roles
+﻿@model CapstoneProject.Models.WorkSpace
 
 @using CapstoneProject.Models
 
 @{
     ViewBag.Title = "AddMemberWS";
     Layout = "~/Views/Shared/_Layout.cshtml";
-<<<<<<< HEAD
 
-=======
->>>>>>> 68b0dabe114be131269b39a27e58acde7e186b47
     var db = new PMSEntities();
     var rs = db.WS_User_Roles.ToList();
 
 }
 
-<<<<<<< HEAD
 
 
-<h2>@Html.DisplayFor(model => model.WorkSpace.WorkSpaceName)</h2>
+
+<h2>@Html.DisplayFor(model => model.WorkSpaceName)</h2>
 
 <ul class="cw-tabs">
     <li rel="process">
         <i class="fas fa-sitemap">@Html.ActionLink("Processes", "ShowGroup", new { id = Model.ID })</i>&nbsp;
     </li>
     <li class="cw-active-tab" rel="members">
-        <i class="fas fa-user-friends">@Html.ActionLink("Members", "AddMemberWS", new { id = Model.WorkSpace_ID })</i>&nbsp;
+        <i class="fas fa-user-friends">@Html.ActionLink("Members", "AddMemberWS", new { id = Model.ID })</i>&nbsp;
     </li>
     <li rel="settings">
-        <i class="fas fa-cog">@Html.ActionLink("Settings", "SettingGroup", new { id = Model.WorkSpace_ID })</i>&nbsp;
+        <i class="fas fa-cog">@Html.ActionLink("Settings", "SettingGroup", new { id = Model.ID })</i>&nbsp;
     </li>
 </ul>
 
-=======
->>>>>>> 68b0dabe114be131269b39a27e58acde7e186b47
 @using (Html.BeginForm("AddMemberWS", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()

@@ -5,13 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<<<<<<< HEAD
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<h2>@CapstoneProject.Content.resources.CWgroup_create.clockworks_group_create_title.</h2>
 
-
-@using (Html.BeginForm())
+@*@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
@@ -52,8 +49,7 @@
             </div>
         </div>
     </div>
-}
-=======
+}*@
     <div class="cw-title">Sign up your workspace</div>
     <ol class="cw-steps">
         <li class="current">
@@ -80,11 +76,17 @@
                 </div>
             </div>
             <div class="form-group row">
-                @Html.LabelFor(model => model.ImageWS, htmlAttributes: new { @class = "control-label col-md-2 cw-required" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ImageWS, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ImageWS, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.ImageWS, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <span class="btn btn-default btn-file">
+                            Choose image <input type="file" name="ImageWS" id="imgInp">
+                        </span>
+                    </span>
+                    <input type="text" class="form-control" name="ImageWS" readonly>
                 </div>
+                <img style="width: 200px;height: auto" id='img-upload' />
+                @Html.ValidationMessageFor(model => model.ImageWS, "", new { @class = "text-danger" })
             </div>
             <div class="form-group row">
                 @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -102,11 +104,6 @@
         }
     </div>
 
->>>>>>> 68b0dabe114be131269b39a27e58acde7e186b47
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
