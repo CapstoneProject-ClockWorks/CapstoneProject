@@ -13,14 +13,17 @@ namespace CapstoneProject
                 "~/Content/libs/font-awesome-4/css/font-awesome.min.css",
                 "~/Content/libs/font-awesome-5/css/all.css",
                 "~/Content/libs/bootstrap/dist/css/bootstrap.min.css",
-                "~/Content/build/css/responsive.css",
-                "~/Content/build/css/style.css"
+                "~/Content/build/css/responsive.css"
             ));
             bundles.Add(new ScriptBundle("~/Content/js").Include(
                 "~/Content/libs/jquery/dist/jquery.min.js",
                 "~/Content/libs/bootstrap/dist/js/bootstrap.min.js",
-                "~/Content/build/js/custom.min.js"
+                "~/Content/build/js/custom.min.js",
+                "~/Content/build/js/cookie.js",
+                "~/Content/build/js/language.js"
             ));
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                        "~/Content/build/scripts/jquery.validate*"));
 
         }
     }

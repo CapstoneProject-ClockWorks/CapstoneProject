@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - @CapstoneProject.Content.resources.CWcommon.clockworks_common_title</title>
     @Styles.Render("~/Content/css")
+    <link href="~/Content/build/css/style.css" rel="stylesheet" />
 </head>
 <body class="nav-sm">
     <div class="container body">
@@ -22,29 +23,8 @@
 
     @Scripts.Render("~/Content/js")
     <script>
-        $(document).ready(function(){
-            //var lang = CapstoneProject.Cookies.getCookie("LangFOrLangForProcessManagementSystem");
-            //$('.setLang[data-lang="' + lang + '"]').addClass('active-lang');
-            $('.setLang').on('click', function () {
-                var lang = $(this).attr("data-lang");
-
-                deleteCookie("LangForProcessManagementSystem");
-                setCookie("LangForProcessManagementSystem", lang, 7);
-                location.reload(true);
-            })
-    
-        })
-        function deleteCookie(name) {
-            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        }
-        function setCookie(name, value, exday) {
-            deleteCookie(name);
-            var d = new Date()
-            d.setTime(d.getTime() + (exday * 24 * 60 * 60));
-            var expires = "expires=" + d.toUTCString();
-            console.log(expires);
-            document.cookie = name + "=" + value + "; " + expires+"; path=/";
-        }
+        
+        
     </script>
     @RenderSection("scripts", required: false)
 </body>

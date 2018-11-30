@@ -4,9 +4,11 @@ $version: "1.0";
 @import '../css/custom.min.css';
 @import 'config';
 @import 'layout';
+@import 'theme';
 @import 'header';
 @import 'menu';
 @import 'content';
 @import 'footer';
 @import 'common';
 /* sass --watch public/build/scss/style.scss public/build/css/style.css */
+/*sass --watch Content/build/scss/style.scss Content/build/css/style.css*/

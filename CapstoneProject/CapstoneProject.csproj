@@ -311,13 +311,16 @@
   <ItemGroup>
     <Content Include="Content\build\css\custom.css" />
     <Content Include="Content\build\css\custom.min.css" />
+    <Content Include="Content\build\css\guest-style.css" />
     <Content Include="Content\build\css\responsive.css" />
     <Content Include="Content\build\css\style.css" />
     <Content Include="Content\build\js\common.js" />
+    <Content Include="Content\build\js\cookie.js" />
     <Content Include="Content\build\js\custom.js" />
     <Content Include="Content\build\js\custom.min.js" />
     <Content Include="Content\build\js\fixHeight.js" />
     <Content Include="Content\build\js\include.js" />
+    <Content Include="Content\build\js\language.js" />
     <Content Include="Content\build\js\script.js" />
     <Content Include="Content\css_select2\select2.css" />
     <Content Include="Content\css_select2\select2.min.css" />
@@ -329,6 +332,7 @@
     <Content Include="Content\images\forward_disabled.png" />
     <Content Include="Content\images\forward_enabled.png" />
     <Content Include="Content\images\forward_enabled_hover.png" />
+    <Content Include="Content\images\intro.jpg" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\logo-big.png" />
     <Content Include="Content\images\logo.png" />
@@ -8957,6 +8961,7 @@
     <Content Include="Views\Group\ShowGroup.cshtml" />
     <Content Include="Views\Group\SettingGroup.cshtml" />
     <Content Include="Views\Group\AddMemberWS.cshtml" />
+    <Content Include="Views\Shared\_GuestLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
