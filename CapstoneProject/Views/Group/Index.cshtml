@@ -6,25 +6,19 @@
     PMSEntities db = new PMSEntities();
 }
 <div style="float:right"><a href="@Url.Action("CreateGroup","Group")" class="btn btn-success">Create Group</a></div>
-<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-    <thead>
-        <tr>
-            <th>@CapstoneProject.Content.resources.CWhome.clockworks_home_table_workspacename</th>
-            <th>Discription</th>
-            <th>Author</th>
-            <th>Create date</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.ActionLink(item.WorkSpaceName, "ShowGroup", new { id = item.ID })</td>
-                <td>@Html.DisplayFor(modle => item.Description)</td>
-                <td>@Html.DisplayFor(model => item.AspNetUser.Email)</td>
-                <td>@Html.DisplayFor(modle => item.Createdate)</td>
-            </tr>
-        }
-
-    </tbody>
-</table>
+<div class="group-list row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-3">
+            <div class="cw-card">
+                <div class="cw-group-image"><img src="~/Content/images/workspace/@Html.DisplayFor(modle => item.ImageWS)" alt="@item.WorkSpaceName" /></div>
+                <div class="cw-group-infor">
+                    <div class="cw-group-name">@Html.ActionLink(item.WorkSpaceName, "ShowGroup", new { id = item.ID })</div>
+                    <div class="cw-group-author"><span class="cw-label">Author:</span>@Html.DisplayFor(modle => item.AspNetUser.UserName)</div>
+                    <div class="cw-group-date"><span class="cw-label">Update at:</span>@Html.DisplayFor(modle => item.Createdate)</div>
+                    <div class="cw-group-des"><span class="cw-label">Description:</span>@Html.DisplayFor(modle => item.Description)</div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

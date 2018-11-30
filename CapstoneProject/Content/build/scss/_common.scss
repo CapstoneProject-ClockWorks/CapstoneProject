@@ -42,6 +42,7 @@
     max-width: 100%;
     margin-bottom: 5px;
     font-weight: 700;
+    margin-right: 3px;
 }
 .cw-input-icon{
     position: relative;
@@ -137,6 +138,30 @@
         }
     }
 }
+.cw-card{
+    margin:20px;
+    width: 300px;
+    border: $light-border;
+    .cw-group-image{
+        max-height: 180px;
+        overflow: hidden;
+        img{
+            width: 100%;
+            height: auto;
+        }
+    }
+    .cw-group-infor{
+        padding: 10px 20px;
+        min-height: 170px;
+        .cw-group-name{
+            a{
+                font-size: 22px;
+                font-weight: 500;
+            }
+        }
+    }
+}
+
 .cw-big-image{
     margin-bottom: 15px;
     &>img{

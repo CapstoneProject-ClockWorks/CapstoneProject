@@ -396,6 +396,7 @@ body {
   max-width: 100%;
   margin-bottom: 5px;
   font-weight: 700;
+  margin-right: 3px;
 }
 
 .cw-input-icon {
@@ -488,6 +489,28 @@ body {
 }
 .cw-box .cw-box-header .cw-member-total {
   float: right;
+}
+
+.cw-card {
+  margin: 20px;
+  width: 300px;
+  border: 1px solid #dfe2e5;
+}
+.cw-card .cw-group-image {
+  max-height: 180px;
+  overflow: hidden;
+}
+.cw-card .cw-group-image img {
+  width: 100%;
+  height: auto;
+}
+.cw-card .cw-group-infor {
+  padding: 10px 20px;
+  min-height: 170px;
+}
+.cw-card .cw-group-infor .cw-group-name a {
+  font-size: 22px;
+  font-weight: 500;
 }
 
 .cw-big-image {
