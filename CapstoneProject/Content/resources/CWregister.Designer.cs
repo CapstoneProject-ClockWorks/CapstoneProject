@@ -79,6 +79,33 @@ namespace CapstoneProject.Content.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm password.
+        /// </summary>
+        public static string clockworks_register_label_confirm_password {
+            get {
+                return ResourceManager.GetString("clockworks_register_label_confirm_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string clockworks_register_label_email {
+            get {
+                return ResourceManager.GetString("clockworks_register_label_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string clockworks_register_label_password {
+            get {
+                return ResourceManager.GetString("clockworks_register_label_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
         public static string clockworks_register_title {

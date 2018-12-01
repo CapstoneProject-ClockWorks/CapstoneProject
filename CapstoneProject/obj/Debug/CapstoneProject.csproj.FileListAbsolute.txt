@@ -272,3 +272,6 @@ D:\workspaces\asp_workspace\Clockworks_ProcessManagement\CapstoneProject\obj\Deb
 D:\workspaces\asp_workspace\Clockworks_ProcessManagement\CapstoneProject\obj\Debug\CapstoneProject.csproj.CopyComplete
 D:\workspaces\asp_workspace\Clockworks_ProcessManagement\CapstoneProject\obj\Debug\CapstoneProject.dll
 D:\workspaces\asp_workspace\Clockworks_ProcessManagement\CapstoneProject\obj\Debug\CapstoneProject.pdb
+D:\workspaces\asp_workspace\Clockworks_ProcessManagement\CapstoneProject\obj\Debug\CapstoneProject.Content.resources.CWIntro.resources
+D:\workspaces\asp_workspace\Clockworks_ProcessManagement\CapstoneProject\obj\Debug\CapstoneProject.Content.resources.CWIntro.vi.resources
+D:\workspaces\asp_workspace\Clockworks_ProcessManagement\CapstoneProject\obj\Debug\CapstoneProject.Content.resources.CWlist_group.resources
