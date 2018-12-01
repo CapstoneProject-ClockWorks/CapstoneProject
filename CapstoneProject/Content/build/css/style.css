@@ -29,9 +29,10 @@ body {
   width: 100%;
   float: left;
 }
-.cw-body .cw-container {
+.cw-container {
   padding: 30px 150px;
 }
+
 #header {
   background-color: #000000;
 }
@@ -356,13 +357,15 @@ body {
   padding: 10px;
   height: auto;
 }
-.nav_title .site_title .small-logo {
+
+.small-logo {
   width: 55px;
   position: fixed;
   top: 10px;
   left: 7px;
 }
-.nav_title .site_title .medium-logo {
+
+.medium-logo {
   width: 45px;
 }
 

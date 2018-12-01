@@ -8961,7 +8961,7 @@
     <Content Include="Views\Group\ShowGroup.cshtml" />
     <Content Include="Views\Group\SettingGroup.cshtml" />
     <Content Include="Views\Group\AddMemberWS.cshtml" />
-    <Content Include="Views\Shared\_GuestLayout.cshtml" />
+    <Content Include="Views\Shared\_NullLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

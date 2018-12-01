@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Home Page";
     PMSEntities db = new PMSEntities();
+    Layout = "~/Views/Shared/_NullLayout.cshtml";
 }
 <div style="float:right"><a href="@Url.Action("CreateGroup","Group")" class="btn btn-success">Create Group</a></div>
 <div class="group-list row">

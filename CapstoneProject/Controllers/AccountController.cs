@@ -449,7 +449,7 @@ namespace CapstoneProject.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Group");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
