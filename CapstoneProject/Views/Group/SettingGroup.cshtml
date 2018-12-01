@@ -57,7 +57,7 @@
                 </span>
                 <input type="text" class="form-control" name="ImageWS" readonly value="@Html.ValueFor(m => m.ImageWS)">
             </div>
-            <img style="width: 200px;height: auto" id='img-upload' />
+            <img style="width: 200px;height: auto" id='img-upload' src="~/Content/images/workspace/@Html.ValueFor(modle => modle.ImageWS)" />
             @Html.ValidationMessageFor(model => model.ImageWS, "", new { @class = "text-danger" })
         </div>
 

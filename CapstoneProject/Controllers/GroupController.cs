@@ -46,7 +46,7 @@ namespace CapstoneProject.Controllers
                 if (ImageWS.ContentLength > 0)
                 {
                     var filename = Path.GetFileName(ImageWS.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Images/"), filename);
+                    var path = Path.Combine(Server.MapPath("~/Content/images/workspace/"), filename);
                     ImageWS.SaveAs(path);
                     avatar = filename;
                 }
@@ -57,7 +57,7 @@ namespace CapstoneProject.Controllers
             WS_User_Roles wsp = new WS_User_Roles();
             wsp.User_ID = userid;
             wsp.Role_Admin = true;
-            wsp.Role_Member = true;
+            wsp.Role_Member = true; 
             db.WS_User_Roles.Add(wsp);
             db.WorkSpaces.Add(ws);
             db.SaveChanges();
@@ -72,6 +72,14 @@ namespace CapstoneProject.Controllers
             db.WorkSpaces.Remove(worksp);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult DeleteMember(WS_User_Roles model)
+        {
+            WS_User_Roles wp = db.WS_User_Roles.Find(model.ID);
+            db.WS_User_Roles.Remove(wp);
+            db.SaveChanges();
+            return RedirectToAction("AddMemberWS", new { id = wp.WorkSpace_ID });
         }
 
         public ActionResult ShowGroup(int? id)
@@ -123,7 +131,7 @@ namespace CapstoneProject.Controllers
                 if (ImageWS.ContentLength > 0)
                 {
                     var filename = Path.GetFileName(ImageWS.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Images/"), filename);
+                    var path = Path.Combine(Server.MapPath("~/Content/images/workspace/"), filename);
                     ImageWS.SaveAs(path);
                     avatar = filename;
                 }

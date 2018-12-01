@@ -8,48 +8,6 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 
-@*@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.WorkSpaceName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.WorkSpaceName, new { htmlAttributes = new { @class = "form-control", @Required = "required" } })
-                @Html.ValidationMessageFor(model => model.WorkSpaceName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ImageWS, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="input-group">
-                <span class="input-group-btn">
-                    <span class="btn btn-default btn-file">
-                        Choose image <input type="file" name="ImageWS" id="imgInp">
-                    </span>
-                </span>
-                <input type="text" class="form-control" name="ImageWS" readonly>
-            </div>
-            <img style="width: 200px;height: auto" id='img-upload' />
-            @Html.ValidationMessageFor(model => model.ImageWS, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @Required = "required" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-default">@CapstoneProject.Content.resources.CWgroup_create.clockworks_group_create_button</button>
-            </div>
-        </div>
-    </div>
-}*@
     <div class="cw-title">Sign up your workspace</div>
     <ol class="cw-steps">
         <li class="current">
@@ -62,11 +20,12 @@
         </li>
     </ol>
     <div class="cw-create-workspace">
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             <h2 class="cw-header-light">Create your workspace right away!!</h2>
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
             <div class="form-group row">
                 @Html.LabelFor(model => model.WorkSpaceName, htmlAttributes: new { @class = "control-label col-md-2 cw-required" })
                 <div class="col-md-10">
@@ -78,6 +37,7 @@
             <div class="form-group row">
                 @Html.LabelFor(model => model.ImageWS, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="input-group">
+                    @Html.ValidationMessage("ImageWS")
                     <span class="input-group-btn">
                         <span class="btn btn-default btn-file">
                             Choose image <input type="file" name="ImageWS" id="imgInp">
@@ -85,8 +45,8 @@
                     </span>
                     <input type="text" class="form-control" name="ImageWS" readonly>
                 </div>
-                <img style="width: 200px;height: auto" id='img-upload' />
-                @Html.ValidationMessageFor(model => model.ImageWS, "", new { @class = "text-danger" })
+                <img style="width: 200px;height: auto"  name="ImageWS" id='img-upload' />
+
             </div>
             <div class="form-group row">
                 @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })

@@ -1,4 +1,3 @@
-D:\capstone_project\CapstoneProject_v1.0\CapstoneProject\obj\Debug\CapstoneProject.csprojAssemblyReference.cache
 D:\capstone_project\CapstoneProject_v1.0\CapstoneProject\obj\Debug\CapstoneProject.Content.resources.CWcommon.resources
 D:\capstone_project\CapstoneProject_v1.0\CapstoneProject\obj\Debug\CapstoneProject.Content.resources.CWgroup_create.resources
 D:\capstone_project\CapstoneProject_v1.0\CapstoneProject\obj\Debug\CapstoneProject.Content.resources.CWhome.resources
@@ -272,3 +271,4 @@ D:\workspaces\asp_workspace\Clockworks_ProcessManagement\CapstoneProject\obj\Deb
 D:\workspaces\asp_workspace\Clockworks_ProcessManagement\CapstoneProject\obj\Debug\CapstoneProject.csproj.CopyComplete
 D:\workspaces\asp_workspace\Clockworks_ProcessManagement\CapstoneProject\obj\Debug\CapstoneProject.dll
 D:\workspaces\asp_workspace\Clockworks_ProcessManagement\CapstoneProject\obj\Debug\CapstoneProject.pdb
+D:\capstone_project\CapstoneProject_v1.0\CapstoneProject\obj\Debug\CapstoneProject.csprojAssemblyReference.cache
