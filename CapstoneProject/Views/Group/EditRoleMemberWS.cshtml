@@ -49,9 +49,9 @@
             @Html.LabelFor(model => model.Role_Admin, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div >
-                    <label>
+                    @*<label>
                         <input type="checkbox" class="js-switch" checked /> Checked
-                    </label>
+                    </label>*@
                     @Html.EditorFor(model => model.Role_Admin)
                     @Html.ValidationMessageFor(model => model.Role_Admin, "", new { @class = "text-danger" })
                 </div>
