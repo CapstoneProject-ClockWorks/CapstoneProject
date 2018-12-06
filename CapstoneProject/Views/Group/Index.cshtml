@@ -17,9 +17,18 @@
                     <div class="cw-group-name">@Html.ActionLink(item.WorkSpaceName, "ShowGroup", new { id = item.ID })</div>
                     <div class="cw-group-author"><span class="cw-label">Author:</span>@Html.DisplayFor(modle => item.AspNetUser.UserName)</div>
                     <div class="cw-group-date"><span class="cw-label">Update at:</span>@Html.DisplayFor(modle => item.Createdate)</div>
-                    <div class="cw-group-des"><span class="cw-label">Description:</span>@Html.DisplayFor(modle => item.Description)</div>
+                    <div class="cw-group-des" style="word-break:break-all"><span class="cw-label">Description:</span>
+                        @{ 
+                            var des = item.Description;
+                            if (des.Length>100)
+                            {
+                                des = des.Substring(1, 100)+"...";
+                            }
+                        }
+                        @des
+                    </div>
                 </div>
             </div>
         </div>
-    }
+                            }
 </div>

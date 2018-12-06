@@ -515,6 +515,9 @@ body {
   font-size: 22px;
   font-weight: 500;
 }
+.cw-card .cw-group-infor .cw-group-des {
+  word-break: break-all;
+}
 
 .cw-big-image {
   margin-bottom: 15px;
