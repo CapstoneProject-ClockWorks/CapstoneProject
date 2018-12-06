@@ -10,116 +10,122 @@
     var rs = db.WS_User_Roles.ToList();
 
 }
+@section CustomCss {
+    <link href="~/Content/css_select2/select2.min.css" rel="stylesheet" />
+}
 
 
 
-
-<h2>@Html.DisplayFor(model => model.WorkSpaceName)</h2>
-
-<ul class="cw-tabs">
-    <li rel="process">
-        <i class="fas fa-sitemap">@Html.ActionLink("Processes", "ShowGroup", new { id = Model.ID })</i>&nbsp;
-    </li>
-    <li class="cw-active-tab" rel="members">
-        <i class="fas fa-user-friends">@Html.ActionLink("Members", "AddMemberWS", new { id = Model.ID })</i>&nbsp;
-    </li>
-    <li rel="settings">
-        <i class="fas fa-cog">@Html.ActionLink("Settings", "SettingGroup", new { id = Model.ID })</i>&nbsp;
-    </li>
-</ul>
-
-@using (Html.BeginForm("AddMemberWS", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.ID)
-
-
-    <div class="input-group">
-        <span class="control-label col-md-3 col-sm-3 col-xs-12">User</span>
-        <div class="col-md-9 col-sm-9 col-xs-12">
-            @*<select class="form-control">*@
-            @foreach (var item in db.AspNetUsers)
-            {
-                <div class="input-group col-md-3" style="margin:7px;padding: 0;margin-left:20px">
-                    <span class="form-control-radio">@item.Email</span>
-                    <input runat="server" value="@item.Email" id="@item.Id" type="checkbox" class="form-control-radio" name="adduser">
-                </div>
-
-            }
+<div class="cw-workspace-header">
+    <div class="cw-workspace-intro">
+        <div class="cw-workspace-avatar">
+            <img src="~/Content/images/workspace/@Html.DisplayFor(model => model.ImageWS)" alt="@Html.DisplayFor(model => model.WorkSpaceName)'s Avatar">
         </div>
-        @Html.DropDownListFor(m => m.User_ID, new SelectList(db.AspNetUsers, "Id", "Email"), new { @class = "input-group select2cbx" })
-        <div class="control-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Input Tags</label>
-            <div class="col-md-9 col-sm-9 col-xs-12">
-                <input id="tags_1" type="text" class="tags form-control" value="social, adverts, sales" />
-                <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
-            </div>
+        <div class="cw-workspace-name cw-normal-header">
+            @Html.DisplayFor(model => model.WorkSpaceName)
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Add Member" class="btn btn-default" />
-            </div>
-        </div>
-
-        <div>
-
-        </div>
-
     </div>
+    <ul class="cw-tabs">
+        <li rel="process">
+            <i class="fas fa-sitemap">@Html.ActionLink("Processes", "ShowGroup", new { id = Model.ID })</i>&nbsp;
+        </li>
+        <li class="cw-active-tab" rel="members">
+            <i class="fas fa-user-friends">@Html.ActionLink("Members", "AddMemberWS", new { id = Model.ID })</i>&nbsp;
+        </li>
+        <li rel="settings">
+            <i class="fas fa-cog">@Html.ActionLink("Settings", "SettingGroup", new { id = Model.ID })</i>&nbsp;
+        </li>
+    </ul>
+</div>
+<div class="cw-container">
+    @using (Html.BeginForm("AddMemberWS", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
 
-}
+
+        <div class="input-group row">
+            <span class="control-label col-md-3 col-sm-3 col-xs-12">User</span>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+                @*<select class="form-control">*@
+                @foreach (var item in db.AspNetUsers)
+                {
+                    <div class="input-group col-md-3" style="margin:7px;padding: 0;margin-left:20px">
+                        <span class="form-control-radio">@item.Email</span>
+                        <input runat="server" value="@item.Email" id="@item.Id" type="checkbox" class="form-control-radio" name="adduser">
+                    </div>
+
+                }
+            </div>
+            @Html.DropDownListFor(m => m.User_ID, new SelectList(db.AspNetUsers, "Id", "Email"), new { @class = "input-group select2cbx" })
+            <div class="control-group row">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Input Tags</label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input id="tags_1" type="text" class="tags form-control" value="social, adverts, sales" />
+                    <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Add Member" class="btn btn-default" />
+                </div>
+            </div>
+
+            <div>
+
+            </div>
+
+        </div>
+
+    }
 
 
-@{
-    var listuser = db.WS_User_Roles.Where(x => x.WorkSpace_ID == Model.ID).ToList();
+    @{
+        var listuser = db.WS_User_Roles.Where(x => x.WorkSpace_ID == Model.ID).ToList();
 
 
-}
+    }
 
 
-<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-    <thead>
-        <tr>
-            <th>Member</th>
-            <th>Role</th>
-            <th>Tool</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in listuser)
-        {
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
             <tr>
-                <td>@item.AspNetUser.Email</td>
-                <td>
-                    @if (item.Role_Admin == true)
-                    {
-                        <p>Admin</p>
-                    }
-                    @if (item.Role_Manager == true)
-                    {
-                        <p>Manager</p>
-                    }
-                    @if (item.Role_Member == true)
-                    {
-                        <p>Member</p>
-                    }
-                </td>
-                <td>@Html.ActionLink("Edit Role", "EditRoleMemberWS", new { id = item.ID })</td>
+                <th>Member</th>
+                <th>Role</th>
+                <th>Tool</th>
             </tr>
-        }
-    </tbody>
-</table>
-
-
-
-<div>
-    @Html.ActionLink("Back to List", "ShowWorkSpace", new { id = Model.ID })
+        </thead>
+        <tbody>
+            @foreach (var item in listuser)
+            {
+                <tr>
+                    <td>@item.AspNetUser.Email</td>
+                    <td>
+                        @if (item.Role_Admin == true)
+                        {
+                            <p>Admin</p>
+                        }
+                        @if (item.Role_Manager == true)
+                        {
+                            <p>Manager</p>
+                        }
+                        @if (item.Role_Member == true)
+                        {
+                            <p>Member</p>
+                        }
+                    </td>
+                    <td>@Html.ActionLink("Edit Role", "EditRoleMemberWS", new { id = item.ID })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
-@section Scripts {
+
+@section CustomScripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/js_select2/select2.min.js"></script>
+
 }
-<link href="~/Content/css_select2/select2.min.css" rel="stylesheet" />
-<script src="~/Content/js_select2/select2.min.js"></script>

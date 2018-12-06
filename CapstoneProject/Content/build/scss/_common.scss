@@ -4,17 +4,17 @@
     .site_title {
         padding: 10px;
         height: auto;
-        .small-logo {
-            width: 55px;
-            position: fixed;
-            top: 10px;
-            left: 7px;
-        }
-
-        .medium-logo {
-            width:45px;    
-        }
     }
+}
+.small-logo {
+    width: 55px;
+    position: fixed;
+    top: 10px;
+    left: 7px;
+}
+
+.medium-logo {
+    width:45px;    
 }
 .cw-header-light{
     font-family: "Segoe UI Light";

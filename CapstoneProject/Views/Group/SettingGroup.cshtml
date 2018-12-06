@@ -5,111 +5,120 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<h2>@Html.DisplayFor(model => model.WorkSpaceName)</h2>
-
-<ul class="cw-tabs">
-    <li  rel="process">
-        <i class="fas fa-sitemap">@Html.ActionLink("Processes", "ShowGroup", new { id = Model.ID })</i>&nbsp;
-    </li>
-    <li rel="members">
-        <i class="fas fa-user-friends">@Html.ActionLink("Members", "AddMemberWS", new { id = Model.ID })</i>&nbsp;
-    </li>
-    <li class="cw-active-tab" rel="settings">
-        <i class="fas fa-cog">@Html.ActionLink("Settings", "SettingGroup", new { id = Model.ID })</i>&nbsp;
-    </li>
-</ul>
-
-
-@using (Html.BeginForm("SettingGroup", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <br />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.WorkSpaceName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.WorkSpaceName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.WorkSpaceName, "", new { @class = "text-danger" })
-            </div>
+<div class="cw-workspace-header">
+    <div class="cw-workspace-intro">
+        <div class="cw-workspace-avatar">
+            <img src="~/Content/images/workspace/@Html.DisplayFor(model => model.ImageWS)" alt="@Html.DisplayFor(model => model.WorkSpaceName)'s Avatar">
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ImageWS, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="input-group">
-                <span class="input-group-btn">
-                    <span class="btn btn-default btn-file">
-                        Choose image <input type="file" name="ImageWS" id="imgInp">
-                    </span>
-                </span>
-                <input type="text" class="form-control" name="ImageWS" readonly value="@Html.ValueFor(m => m.ImageWS)">
-            </div>
-            <img style="width: 200px;height: auto" id='img-upload' />
-            @Html.ValidationMessageFor(model => model.ImageWS, "", new { @class = "text-danger" })
-        </div>
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+        <div class="cw-workspace-name cw-normal-header">
+            @Html.DisplayFor(model => model.WorkSpaceName)
         </div>
     </div>
-}
+    <ul class="cw-tabs">
+        <li rel="process">
+            <i class="fas fa-sitemap">@Html.ActionLink("Processes", "ShowGroup", new { id = Model.ID })</i>&nbsp;
+        </li>
+        <li rel="members">
+            <i class="fas fa-user-friends">@Html.ActionLink("Members", "AddMemberWS", new { id = Model.ID })</i>&nbsp;
+        </li>
+        <li class="cw-active-tab" rel="settings">
+            <i class="fas fa-cog">@Html.ActionLink("Settings", "SettingGroup", new { id = Model.ID })</i>&nbsp;
+        </li>
+    </ul>
+</div>
+<div class="cw-container">
 
-<div>
-    @Html.ActionLink("Delete", "DeleteGroup", new { id = Model.ID })
+    @using (Html.BeginForm("SettingGroup", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <br />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.WorkSpaceName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.WorkSpaceName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.WorkSpaceName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImageWS, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <span class="btn btn-default btn-file">
+                            Choose image <input type="file" name="ImageWS" id="imgInp">
+                        </span>
+                    </span>
+                    <input type="text" class="form-control" name="ImageWS" readonly value="@Html.ValueFor(m => m.ImageWS)">
+                </div>
+                <img style="width: 200px;height: auto" id='img-upload' />
+                @Html.ValidationMessageFor(model => model.ImageWS, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        <a href="@Url.Action("DeleteGroup","Group",new { id = Model.ID})" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Remove</a>
+    </div>
+
 </div>
 
+@section CustomScripts {
+    <script>
+        $(document).ready(function () {
+            $(document).on('change', '.btn-file :file', function () {
+                var input = $(this),
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [label]);
+            });
 
+            $('.btn-file :file').on('fileselect', function (event, label) {
 
-<script>
-    $(document).ready(function () {
-        $(document).on('change', '.btn-file :file', function () {
-            var input = $(this),
-                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-            input.trigger('fileselect', [label]);
-        });
+                var input = $(this).parents('.input-group').find(':text'),
+                    log = label;
 
-        $('.btn-file :file').on('fileselect', function (event, label) {
-
-            var input = $(this).parents('.input-group').find(':text'),
-                log = label;
-
-            if (input.length) {
-                input.val(log);
-            } else {
-                if (log) alert(log);
-            }
-
-        });
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#img-upload').attr('src', e.target.result);
+                if (input.length) {
+                    input.val(log);
+                } else {
+                    if (log) alert(log);
                 }
 
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
+            });
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
 
-        $("#imgInp").change(function () {
-            readURL(this);
+                    reader.onload = function (e) {
+                        $('#img-upload').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#imgInp").change(function () {
+                readURL(this);
+            });
         });
-    });
-</script>
+    </script>
+}

@@ -199,6 +199,21 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Content\resources\CWIntro.vi.Designer.cs">
+      <DependentUpon>CWIntro.vi.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Content\resources\CWIntro.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CWIntro.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\resources\CWlist_group.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CWlist_group.resx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>PMS_Model.tt</DependentUpon>
@@ -8961,12 +8976,11 @@
     <Content Include="Views\Group\ShowGroup.cshtml" />
     <Content Include="Views\Group\SettingGroup.cshtml" />
     <Content Include="Views\Group\AddMemberWS.cshtml" />
-    <Content Include="Views\Shared\_GuestLayout.cshtml" />
+    <Content Include="Views\Shared\_NullLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
@@ -9005,6 +9019,18 @@
     <EmbeddedResource Include="Content\resources\CWhome.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CWhome.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\resources\CWIntro.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CWIntro.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\resources\CWIntro.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CWIntro.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\resources\CWlist_group.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CWlist_group.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Content\resources\CWlogin.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Home Page";
-    Layout = "~/Views/Shared/_GuestLayout.cshtml";
+    Layout = "~/Views/Shared/_NullLayout.cshtml";
 
 }
 @section CustomCss{
@@ -9,20 +9,20 @@
 }
 <div class="cw-intro-page row">
     <div class="col-sm-6 cw-wapper">
-        <h1 style="font-size: 40px;line-height: 47px;text-align: left;font-weight:300"><strong>BUSINESS PROCESS MODELING</strong> MADE EASILY</h1>
+        <h1 style="font-size: 40px;line-height: 47px;text-align: left;font-weight:300"><strong>@CapstoneProject.Content.resources.CWIntro.Clockworks_Intro_slogan1</strong> @CapstoneProject.Content.resources.CWIntro.Clockworks_Intro_slogan2</h1>
         <div class="cw-benefit">
-            <p>This&nbsp;<strong>business process modeling tool</strong>&nbsp;has everything an expert in processes could ever want:</p>
+            <p>@CapstoneProject.Content.resources.CWIntro.Clockworks_Intro_benifits1&nbsp;<strong>@CapstoneProject.Content.resources.CWIntro.Clockworks_Intro_benifits2</strong>&nbsp;@CapstoneProject.Content.resources.CWIntro.Clockworks_Intro_benifits3</p>
             <ul>
-                <li>Model your processes</li>
-                <li>Quick and easy to use.</li>
-                <li>Uses BPMN 2.0 notation.</li>
+                <li>@CapstoneProject.Content.resources.CWIntro.Clockworks_Intro_benefit1</li>
+                <li>@CapstoneProject.Content.resources.CWIntro.Clockworks_Intro_benefit2</li>
+                <li>@CapstoneProject.Content.resources.CWIntro.Clockworks_Intro_benefit3</li>
                 <li>
-                    Generates perfect, beautiful, complete, professional and stylish documentation.
+                    @CapstoneProject.Content.resources.CWIntro.Clockworks_Intro_benefit4
                 </li>
             </ul>
             <div class="cw-btn-intro">
-                <a href="#" class="btn btn-success cw-btn-big" btn>Create Account</a>
-                <a href="#" class="btn btn-default cw-btn-big" btn>Find Group</a>
+                <a href="#" class="btn btn-success cw-btn-big" btn>@CapstoneProject.Content.resources.CWIntro.Clockworks_Intro_create_button</a>
+                <a href="#" class="btn btn-default cw-btn-big" btn>@CapstoneProject.Content.resources.CWIntro.Clockworks_Intro_find_button</a>
             </div>
         </div>
     </div>

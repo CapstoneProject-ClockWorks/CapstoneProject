@@ -123,6 +123,15 @@
   <data name="clockworks_register_header" xml:space="preserve">
     <value>Tạo tài khoản mới.</value>
   </data>
+  <data name="clockworks_register_label_confirm_password" xml:space="preserve">
+    <value>Xác nhận lại mật khẩu</value>
+  </data>
+  <data name="clockworks_register_label_email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="clockworks_register_label_password" xml:space="preserve">
+    <value>Mật khẩu</value>
+  </data>
   <data name="clockworks_register_title" xml:space="preserve">
     <value>Đăng ký</value>
   </data>

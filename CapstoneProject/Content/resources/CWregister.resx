@@ -123,6 +123,15 @@
   <data name="clockworks_register_header" xml:space="preserve">
     <value>Create a new account.</value>
   </data>
+  <data name="clockworks_register_label_confirm_password" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="clockworks_register_label_email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="clockworks_register_label_password" xml:space="preserve">
+    <value>Password</value>
+  </data>
   <data name="clockworks_register_title" xml:space="preserve">
     <value>Register</value>
   </data>

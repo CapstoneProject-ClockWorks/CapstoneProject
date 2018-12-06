@@ -6,6 +6,15 @@
     <title>@ViewBag.Title - @CapstoneProject.Content.resources.CWcommon.clockworks_common_title</title>
     @Styles.Render("~/Content/css")
     <link href="~/Content/build/css/style.css" rel="stylesheet" />
+    <style>
+        .nav.navbar-nav.navbar-left{
+            display:none;
+        }
+    </style>
+    @if (IsSectionDefined("CustomCss"))
+    {
+        @RenderSection("CustomCss", required: false)
+    }
 </head>
 <body class="nav-sm">
     <div class="container body">
@@ -22,10 +31,9 @@
     </div>
 
     @Scripts.Render("~/Content/js")
-    <script>
-        
-        
-    </script>
-    @RenderSection("scripts", required: false)
+    @if (IsSectionDefined("CustomScripts"))
+    {
+        @RenderSection("CustomScripts", required: false)
+    }
 </body>
 </html>
