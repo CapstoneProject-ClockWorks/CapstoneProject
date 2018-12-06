@@ -124,7 +124,7 @@ namespace CapstoneProject.Content.resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create Account.
+        ///   Looks up a localized string similar to Create Group.
         /// </summary>
         public static string Clockworks_Intro_create_button {
             get {

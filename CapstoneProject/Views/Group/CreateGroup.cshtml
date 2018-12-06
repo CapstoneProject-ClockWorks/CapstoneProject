@@ -47,11 +47,11 @@
             </div>
         </div>
     }*@
-<div class="cw-title">Sign up your workspace</div>
+<div class="cw-title">Sign up your group</div>
 <ol class="cw-steps">
     <li class="current">
         <i class="fas fa-briefcase"></i>
-        <strong class="cw-step">Step 1:</strong>Set up your workspace
+        <strong class="cw-step">Step 1:</strong>Set up your group
     </li>
     <li>
         <i class="fas fa-user-plus"></i>
@@ -62,7 +62,7 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        <h2 class="cw-header-light">Create your workspace right away!!</h2>
+        <h2 class="cw-header-light">Create your group right away!!</h2>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group row">
             @Html.LabelFor(model => model.WorkSpaceName, htmlAttributes: new { @class = "control-label col-md-2 cw-required" })
@@ -90,7 +90,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @Required = "required" } })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                <span class="cw-hint">Describe your workspace that you want to establish</span>
+                <span class="cw-hint">Describe your group that you want to establish</span>
             </div>
         </div>
         <div class="form-group row">

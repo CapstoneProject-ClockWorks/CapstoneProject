@@ -8914,6 +8914,7 @@
     <Content Include="Content\build\scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Content\build\scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Content\build\scripts\modernizr-2.8.3.js" />
+    <Content Include="Content\images\workspace\default.png" />
     <Content Include="Models\PMS_Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PMS_Model.edmx</DependentUpon>
@@ -8981,6 +8982,7 @@
   <ItemGroup>
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
