@@ -275,3 +275,6 @@ D:\workspaces\asp_workspace\Clockworks_ProcessManagement\CapstoneProject\obj\Deb
 D:\workspaces\asp_workspace\Clockworks_ProcessManagement\CapstoneProject\obj\Debug\CapstoneProject.Content.resources.CWIntro.resources
 D:\workspaces\asp_workspace\Clockworks_ProcessManagement\CapstoneProject\obj\Debug\CapstoneProject.Content.resources.CWIntro.vi.resources
 D:\workspaces\asp_workspace\Clockworks_ProcessManagement\CapstoneProject\obj\Debug\CapstoneProject.Content.resources.CWlist_group.resources
+D:\capstone_project\CapstoneProject_v1.0\CapstoneProject\obj\Debug\CapstoneProject.Content.resources.CWIntro.resources
+D:\capstone_project\CapstoneProject_v1.0\CapstoneProject\obj\Debug\CapstoneProject.Content.resources.CWlist_group.resources
+D:\capstone_project\CapstoneProject_v1.0\CapstoneProject\obj\Debug\CapstoneProject.Content.resources.CWIntro.vi.resources
