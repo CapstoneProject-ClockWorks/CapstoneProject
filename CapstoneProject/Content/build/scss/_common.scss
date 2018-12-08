@@ -81,7 +81,6 @@
         float: left;
         margin: 0;
         cursor: pointer;
-        padding: 0px 21px;
         height: 40px;
         line-height: 40px;
         // border-top: 1px solid #dfe2e5;
@@ -108,7 +107,14 @@
         }
         &:hover:not(.cw-active-tab){
             border: 1px solid #dfe2e5;
-            color: #9da0a1;
+            a{
+                color: #9da0a1;   
+            }
+        }
+        &:not(.cw-active-tab){
+            a{
+                color:black;
+            }
         }
         .cw-tab-quantity{
             display: inline-block;
@@ -118,6 +124,10 @@
             line-height: 1;
             background-color: rgba(27,31,35,.08);
             border-radius: 20px;
+        }
+        a{
+            padding: 0px 21px;
+            display:block;
         }
     }
     

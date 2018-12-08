@@ -442,7 +442,6 @@ body {
   float: left;
   margin: 0;
   cursor: pointer;
-  padding: 0px 21px;
   height: 40px;
   line-height: 40px;
   background: none;
@@ -466,7 +465,12 @@ body {
 }
 .cw-tabs li:hover:not(.cw-active-tab) {
   border: 1px solid #dfe2e5;
+}
+.cw-tabs li:hover:not(.cw-active-tab) a {
   color: #9da0a1;
+}
+.cw-tabs li:not(.cw-active-tab) a {
+  color: black;
 }
 .cw-tabs li .cw-tab-quantity {
   display: inline-block;
@@ -476,6 +480,10 @@ body {
   line-height: 1;
   background-color: rgba(27, 31, 35, 0.08);
   border-radius: 20px;
+}
+.cw-tabs li a {
+  padding: 0px 21px;
+  display: block;
 }
 
 .cw-normal-hr {
