@@ -68,6 +68,7 @@
 .cw-hint{
     color: rgb(156, 157, 161);
     margin-top: 5px;
+    display:block;
     font-size: 13px;
 }
 .cw-tabs{
@@ -135,6 +136,11 @@
 .cw-normal-hr{
     margin-top: 20px;
 	border-bottom: $light-border;
+}
+.cw-danger-box{
+    border: $light-border;
+    padding: 20px 15px;
+    border-color: red;
 }
 .cw-box{
     border: $light-border;

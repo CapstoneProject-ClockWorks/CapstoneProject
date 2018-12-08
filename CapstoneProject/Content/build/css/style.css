@@ -427,6 +427,7 @@ body {
 .cw-hint {
   color: #9c9da1;
   margin-top: 5px;
+  display: block;
   font-size: 13px;
 }
 
@@ -489,6 +490,12 @@ body {
 .cw-normal-hr {
   margin-top: 20px;
   border-bottom: 1px solid #dfe2e5;
+}
+
+.cw-danger-box {
+  border: 1px solid #dfe2e5;
+  padding: 20px 15px;
+  border-color: red;
 }
 
 .cw-box {
