@@ -38,11 +38,11 @@ namespace CapstoneProject.Controllers
 		[HttpPost]
 		public ActionResult CreateGroup(WorkSpace ws, HttpPostedFileBase ImageWS)
 		{
-			string avatar = "";
 			string userid = User.Identity.GetUserId();
 			Session["UserId"] = userid;
 			if (ImageWS != null)
 			{
+				string avatar = "";
 				if (ImageWS.ContentLength > 0)
 				{
 					var filename = Path.GetFileName(ImageWS.FileName);
@@ -52,10 +52,10 @@ namespace CapstoneProject.Controllers
 				}
 				ws.ImageWS = avatar;
 			}
-			else
-			{
-				ws.ImageWS = "default.png";
-			}
+			//else
+			//{
+			//	ws.ImageWS = "default.png";
+			//}
 			ws.Createdate = DateTime.Now;
 			ws.User_ID = userid;
 			WS_User_Roles wsp = new WS_User_Roles();
@@ -65,9 +65,38 @@ namespace CapstoneProject.Controllers
 			db.WS_User_Roles.Add(wsp);
 			db.WorkSpaces.Add(ws);
 			db.SaveChanges();
-			return RedirectToAction("Index");
+			return RedirectToAction("InviteMember", "Group", new { id = ws.ID });
 		}
+		public ActionResult InviteMember(int? id)
+		{
+			if (Request.IsAuthenticated)
+			{
+				string user = User.Identity.GetUserId();
+				Session["UserID"] = user;
+				WorkSpace addmem = db.WorkSpaces.Find(id);
+				return View(addmem);
+			}
+			else
+			{
+				return RedirectToAction("Login", "Account");
+			}
+		}
+		[HttpPost]
+		public ActionResult InviteMember(WorkSpace model, List<string> adduser)
+		{
+			WorkSpace wp = db.WorkSpaces.Find(model.ID);
+			foreach (var user in adduser)
+			{
+				WS_User_Roles wsuser = new WS_User_Roles();
+				wsuser.User_ID = db.AspNetUsers.SingleOrDefault(x => x.Email == user).Id;
+				wsuser.WorkSpace_ID = wp.ID;
+				wsuser.Role_Member = true;
+				db.WS_User_Roles.Add(wsuser);
+				db.SaveChanges();
 
+			}
+			return RedirectToAction("ShowGroup", new { id = model.ID });
+		}
 		public ActionResult DeleteGroup(WorkSpace ws)
 		{
 			WorkSpace worksp = db.WorkSpaces.Find(ws.ID);

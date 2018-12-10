@@ -27,13 +27,13 @@
     </div>
     <ul class="cw-tabs">
         <li rel="process">
-            <a href="@Url.Action("ShowGroup", "Group", new { id = Model.ID })"><i class="fas fa-sitemap"></i> Process</a>
+            <i class="fas fa-sitemap">@Html.ActionLink("Processes", "ShowGroup", new { id = Model.ID })</i>&nbsp;
         </li>
-        <li rel="members" class="cw-active-tab" >
-            <a href="@Url.Action("AddMemberWS", "Group", new { id = Model.ID })"><i class="fas fa-user-friends"></i> Members</a>
+        <li class="cw-active-tab" rel="members">
+            <i class="fas fa-user-friends">@Html.ActionLink("Members", "AddMemberWS", new { id = Model.ID })</i>&nbsp;
         </li>
         <li rel="settings">
-            <a href="@Url.Action("SettingGroup", "Group", new { id = Model.ID })"><i class="fas fa-cog"></i> Settings</a>
+            <i class="fas fa-cog">@Html.ActionLink("Settings", "SettingGroup", new { id = Model.ID })</i>&nbsp;
         </li>
     </ul>
 </div>
@@ -59,13 +59,13 @@
                 }
             </div>
             @*@Html.DropDownListFor(m => m.User_ID, new SelectList(db.AspNetUsers, "Id", "Email"), new { @class = "input-group select2cbx" })
-            <div class="control-group row">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Input Tags</label>
-                <div class="col-md-9 col-sm-9 col-xs-12">
-                    <input id="tags_1" type="text" class="tags form-control" value="social, adverts, sales" />
-                    <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
-                </div>
-            </div>*@
+                <div class="control-group row">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Input Tags</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <input id="tags_1" type="text" class="tags form-control" value="social, adverts, sales" />
+                        <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
+                    </div>
+                </div>*@
 
             <div class="form-group row">
                 <div class="col-md-offset-2 col-md-10">
@@ -116,16 +116,29 @@
                             <p>Member</p>
                         }
                     </td>
-                    <td>@Html.ActionLink("Edit Role", "EditRoleMemberWS", new { id = item.ID })</td>
+                    <td>
+                        @Html.ActionLink("Edit Role", "EditRoleMemberWS", new { id = item.ID })
+                        <span>|</span>
+                        <a href="@Url.Action("DeleteMember","Group",new { id = item.ID })" onclick="return confirmDelete()" class="delele-user">Delete Role</a>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-
+<div id="confirmBox" style="display: none">
+    <div class="message"></div>
+    <span class="yes">Yes</span>
+    <span class="no">No</span>
+</div>
 
 @section CustomScripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Content/js_select2/select2.min.js"></script>
-
+    <script>
+        function confirmDelete() {
+            var a = confirm("Do you want to delete!");
+            return a;
+        }
+    </script>
 }

@@ -8937,6 +8937,7 @@
       <DependentUpon>PMS_Model.edmx</DependentUpon>
     </Content>
     <Content Include="Views\Group\Index.cshtml" />
+    <Content Include="Views\Group\InviteMember.cshtml" />
     <None Include="Views\Shared\Layouts\footer.cshtml" />
     <None Include="Views\Shared\Layouts\header.cshtml" />
     <None Include="Views\Shared\Layouts\menu.cshtml" />
