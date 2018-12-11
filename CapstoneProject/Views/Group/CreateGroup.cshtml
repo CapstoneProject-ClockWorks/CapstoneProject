@@ -4,104 +4,108 @@
     ViewBag.Title = CapstoneProject.Content.resources.CWgroup_create.clockworks_group_create_title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section CustomCss{
+    <style>
+        input[type=file] {
+            outline: 0;
+            opacity: 0;
+            pointer-events: none;
+            user-select: none;
+        }
 
-@*@using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+        .label {
+            width: 120px;
+            border: 2px dashed grey;
+            border-radius: 5px;
+            display: block;
+            padding: 1.2em;
+            transition: border 300ms ease;
+            cursor: pointer;
+            text-align: center;
+        }
 
-        <div class="form-horizontal">
+            .label i {
+                display: block;
+                font-size: 42px;
+                padding-bottom: 16px;
+            }
+
+            .label i,
+            .label .title {
+                color: grey;
+                transition: 200ms color;
+            }
+
+            .label:hover {
+                border: 2px solid black;
+            }
+
+                .label:hover i,
+                .label:hover .title {
+                    color: black;
+                }
+    </style>
+}
+<div class="cw-container">
+    <div class="cw-title">Sign up your group</div>
+    <ol class="cw-steps">
+        <li class="current">
+            <i class="fas fa-briefcase"></i>
+            <strong class="cw-step">Step 1:</strong>Set up your group
+        </li>
+        <li>
+            <i class="fas fa-user-plus"></i>
+            <strong class="cw-step">Step 2:</strong>Invite Members
+        </li>
+    </ol>
+    <div class="cw-create-workspace">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <h2 class="cw-header-light">Create your group right away!!</h2>
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.WorkSpaceName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+            <div class="form-group row">
+                @Html.LabelFor(model => model.WorkSpaceName, htmlAttributes: new { @class = "control-label col-md-3 cw-required" })
+                <div class="col-md-9">
                     @Html.EditorFor(model => model.WorkSpaceName, new { htmlAttributes = new { @class = "form-control", @Required = "required" } })
                     @Html.ValidationMessageFor(model => model.WorkSpaceName, "", new { @class = "text-danger" })
+                    <span class="cw-hint">This will be your workspace name on our website</span>
                 </div>
             </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.ImageWS, htmlAttributes: new { @class = "control-label col-md-3" })
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ImageWS, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <span class="btn btn-default btn-file">
-                            Choose image <input type="file" name="ImageWS" id="imgInp">
-                        </span>
-                    </span>
-                    <input type="text" class="form-control" name="ImageWS" readonly>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="label">
+                                <i class="fas fa-paperclip"></i>
+                                <span class="title">Add Image</span>
+                                <input type="file" name="ImageWS" id="imgInp" />
+                            </label>
+                        </div>
+                        <div class="col-md-8">
+                            <img style="width: 200px;height: auto" id='img-upload' />
+                        </div>
+                    </div>
                 </div>
-                <img style="width: 200px;height: auto" id='img-upload' />
-                @Html.ValidationMessageFor(model => model.ImageWS, "", new { @class = "text-danger" })
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @Required = "required" } })
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @Required = "required" } })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    <span class="cw-hint">Describe your group that you want to establish</span>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group row">
                 <div class="col-md-offset-2 col-md-10">
-                    <button type="submit" class="btn btn-default">@CapstoneProject.Content.resources.CWgroup_create.clockworks_group_create_button</button>
+                    <button type="submit" class="btn btn-success">@CapstoneProject.Content.resources.CWgroup_create.clockworks_group_create_button</button>
                 </div>
             </div>
-        </div>
-    }*@
-<div class="cw-title">Sign up your group</div>
-<ol class="cw-steps">
-    <li class="current">
-        <i class="fas fa-briefcase"></i>
-        <strong class="cw-step">Step 1:</strong>Set up your group
-    </li>
-    <li>
-        <i class="fas fa-user-plus"></i>
-        <strong class="cw-step">Step 2:</strong>Invite Members
-    </li>
-</ol>
-<div class="cw-create-workspace">
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        <h2 class="cw-header-light">Create your group right away!!</h2>
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group row">
-            @Html.LabelFor(model => model.WorkSpaceName, htmlAttributes: new { @class = "control-label col-md-2 cw-required" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.WorkSpaceName, new { htmlAttributes = new { @class = "form-control", @Required = "required" } })
-                @Html.ValidationMessageFor(model => model.WorkSpaceName, "", new { @class = "text-danger" })
-                <span class="cw-hint">This will be your workspace name on our website</span>
-            </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(model => model.ImageWS, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="input-group">
-                <span class="input-group-btn">
-                    <span class="btn btn-default btn-file">
-                        Choose image <input type="file" name="ImageWS" id="imgInp">
-                    </span>
-                </span>
-                <input type="text" class="form-control" name="ImageWS" readonly>
-            </div>
-            <img style="width: 200px;height: auto" id='img-upload' />
-            @Html.ValidationMessageFor(model => model.ImageWS, "", new { @class = "text-danger" })
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @Required = "required" } })*@
-                @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @Required = "required" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                <span class="cw-hint">Describe your group that you want to establish</span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-success">@CapstoneProject.Content.resources.CWgroup_create.clockworks_group_create_button</button>
-            </div>
-        </div>
-    }
+        }
+    </div>
 </div>
-
 
 @section CustomScripts{
     @Scripts.Render("~/bundles/jqueryval")
