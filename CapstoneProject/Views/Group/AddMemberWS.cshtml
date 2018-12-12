@@ -27,13 +27,13 @@
     </div>
     <ul class="cw-tabs">
         <li rel="process">
-            <i class="fas fa-sitemap">@Html.ActionLink("Processes", "ShowGroup", new { id = Model.ID })</i>&nbsp;
+            <a href="@Url.Action("ShowGroup", "Group", new { id = Model.ID })"><i class="fas fa-sitemap"></i> Process</a>
         </li>
-        <li class="cw-active-tab" rel="members">
-            <i class="fas fa-user-friends">@Html.ActionLink("Members", "AddMemberWS", new { id = Model.ID })</i>&nbsp;
+        <li rel="members" class="cw-active-tab">
+            <a href="@Url.Action("AddMemberWS", "Group", new { id = Model.ID })"><i class="fas fa-user-friends"></i> Members</a>
         </li>
         <li rel="settings">
-            <i class="fas fa-cog">@Html.ActionLink("Settings", "SettingGroup", new { id = Model.ID })</i>&nbsp;
+            <a href="@Url.Action("SettingGroup", "Group", new { id = Model.ID })"><i class="fas fa-cog"></i> Settings</a>
         </li>
     </ul>
 </div>

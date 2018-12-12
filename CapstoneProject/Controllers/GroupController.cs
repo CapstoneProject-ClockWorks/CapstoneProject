@@ -52,10 +52,10 @@ namespace CapstoneProject.Controllers
 				}
 				ws.ImageWS = avatar;
 			}
-			//else
-			//{
-			//	ws.ImageWS = "default.png";
-			//}
+			else
+			{
+				ws.ImageWS = "default.png";
+			}
 			ws.Createdate = DateTime.Now;
 			ws.User_ID = userid;
 			WS_User_Roles wsp = new WS_User_Roles();
