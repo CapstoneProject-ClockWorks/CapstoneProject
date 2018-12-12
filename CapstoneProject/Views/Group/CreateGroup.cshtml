@@ -59,7 +59,7 @@
         </li>
     </ol>
     <div class="cw-create-workspace">
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             <h2 class="cw-header-light">Create your group right away!!</h2>
