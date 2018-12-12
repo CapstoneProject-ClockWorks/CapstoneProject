@@ -12,7 +12,11 @@
     {
         <div class="col-sm-3">
             <div class="cw-card">
-                <div class="cw-group-image"><img src="~/Content/images/workspace/@Html.DisplayFor(modle => item.ImageWS)" alt="@item.WorkSpaceName" class="image-medium"/></div>
+                <div class="cw-group-image">
+                    <a href="@Url.Action("ShowGroup","Group",new { id = item.ID})">
+                        <img src="~/Content/images/workspace/@Html.DisplayFor(modle => item.ImageWS)" alt="@item.WorkSpaceName" class="image-medium" />
+                    </a>    
+                </div>
                 <div class="cw-group-infor">
                     <div class="cw-group-name">@Html.ActionLink(item.WorkSpaceName, "ShowGroup", new { id = item.ID })</div>
                     <div class="cw-group-author"><span class="cw-label">Author:</span>@Html.DisplayFor(modle => item.AspNetUser.UserName)</div>
