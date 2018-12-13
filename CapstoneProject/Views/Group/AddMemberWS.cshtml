@@ -96,14 +96,7 @@
             <tr>
                 <th>Member</th>
                 <th>Role</th>
-                @foreach (var item in listuser)
-                {
-                    if (item.Role_Admin == true)
-                    {
-                        <th>Tool</th>
-                    }
-                }
-
+                <th>Tool</th>
             </tr>
         </thead>
         <tbody>
@@ -128,10 +121,12 @@
                     <td>
                         @foreach (var items in listuser)
                         {
-                            if (items.Role_Admin == true && items.User_ID == user)
+                            if (items.Role_Admin == true)
                             {
-                                @*@Html.ActionLink("Edit Role", "EditRoleMemberWS", new { id = item.ID })*@
-                                <a href="@Url.Action("Edit Role", "EditRoleMemberWS", new { id = item.ID })">Edit</a>
+                                if (items.User_ID == user)
+                                {
+                                    @Html.ActionLink("Edit Role", "EditRoleMemberWS", new { id = item.ID })
+                                }
                             }
                         }
 
@@ -141,8 +136,11 @@
                             {
                                 <span>|</span>
                                 <a href="@Url.Action("DeleteMember", "Group", new { id = item.ID })" onclick="return confirmDelete()" class="delele-user">Delete Role</a>
+                                <span>|</span>
                             }
                         }
+
+                        <a href="@Url.Action("MemberOutGroup", "Group", new { id = item.ID })" onclick="return confirmOut()" class="delete-user">Out Group</a>
                     </td>
                 </tr>
             }
@@ -162,6 +160,12 @@
         function confirmDelete() {
             var a = confirm("Do you want to delete!");
             return a;
+        }
+    </script>
+    <script>
+        function confirmOut() {
+            var b = confirm("Do you want to delete!");
+            return b;
         }
     </script>
 }

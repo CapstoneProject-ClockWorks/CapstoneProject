@@ -114,6 +114,13 @@ namespace CapstoneProject.Controllers
 			db.SaveChanges();
 			return RedirectToAction("AddMemberWS", new { id = wp.WorkSpace_ID });
 		}
+		public ActionResult MemberOutGroup(WS_User_Roles model)
+		{
+			WS_User_Roles wp = db.WS_User_Roles.Find(model.ID);
+			db.WS_User_Roles.Remove(wp);
+			db.SaveChanges();
+			return RedirectToAction("Index");
+		}
 
 		public ActionResult ShowGroup(int? id)
 		{
