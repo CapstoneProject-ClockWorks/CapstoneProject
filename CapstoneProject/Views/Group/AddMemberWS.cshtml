@@ -1,6 +1,7 @@
 ﻿@model CapstoneProject.Models.WorkSpace
 
 @using CapstoneProject.Models
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "AddMemberWS";
@@ -8,6 +9,9 @@
 
     var db = new PMSEntities();
     var rs = db.WS_User_Roles.ToList();
+    WS_User_Roles ws = new WS_User_Roles();
+    string user = User.Identity.GetUserId();
+    Session["UserID"] = user;
 
 }
 @section CustomCss {
@@ -84,8 +88,6 @@
 
     @{
         var listuser = db.WS_User_Roles.Where(x => x.WorkSpace_ID == Model.ID).ToList();
-
-
     }
 
 
@@ -94,7 +96,14 @@
             <tr>
                 <th>Member</th>
                 <th>Role</th>
-                <th>Tool</th>
+                @foreach (var item in listuser)
+                {
+                    if (item.Role_Admin == true)
+                    {
+                        <th>Tool</th>
+                    }
+                }
+
             </tr>
         </thead>
         <tbody>
@@ -117,9 +126,23 @@
                         }
                     </td>
                     <td>
-                        @Html.ActionLink("Edit Role", "EditRoleMemberWS", new { id = item.ID })
-                        <span>|</span>
-                        <a href="@Url.Action("DeleteMember","Group",new { id = item.ID })" onclick="return confirmDelete()" class="delele-user">Delete Role</a>
+                        @foreach (var items in listuser)
+                        {
+                            if (items.Role_Admin == true && items.User_ID == user)
+                            {
+                                @*@Html.ActionLink("Edit Role", "EditRoleMemberWS", new { id = item.ID })*@
+                                <a href="@Url.Action("Edit Role", "EditRoleMemberWS", new { id = item.ID })">Edit</a>
+                            }
+                        }
+
+                        @foreach (var items in listuser)
+                        {
+                            if (items.Role_Admin == true && items.User_ID == user)
+                            {
+                                <span>|</span>
+                                <a href="@Url.Action("DeleteMember", "Group", new { id = item.ID })" onclick="return confirmDelete()" class="delele-user">Delete Role</a>
+                            }
+                        }
                     </td>
                 </tr>
             }

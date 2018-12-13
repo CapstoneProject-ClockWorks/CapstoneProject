@@ -11,8 +11,9 @@ namespace CapstoneProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class WorkSpace
+	using System.ComponentModel.DataAnnotations;
+
+	public partial class WorkSpace
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public WorkSpace()
@@ -21,6 +22,7 @@ namespace CapstoneProject.Models
         }
     
         public int ID { get; set; }
+		[Required]
         public string WorkSpaceName { get; set; }
         public string Description { get; set; }
         public string User_ID { get; set; }
