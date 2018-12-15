@@ -325,6 +325,7 @@
     <Compile Include="Models\WS_User_Roles.cs">
       <DependentUpon>PMS_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\GroupViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\build\css\custom.css" />

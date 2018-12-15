@@ -18,28 +18,20 @@ namespace CapstoneProject.Controllers
 		// GET: Group
 		public ActionResult Index()
 		{
-			var viewlistworkspace = db.WorkSpaces.OrderByDescending(m => m.ID).ToList();
-			return View(viewlistworkspace);
+			var listgroup = db.WorkSpaces.OrderByDescending(m => m.ID).ToList();
+            ViewData["ListGroup"] = listgroup; 
+			return View();
 		}
 		public ActionResult CreateGroup()
 		{
-			if (Request.IsAuthenticated)
-			{
-				string user = User.Identity.GetUserId();
-				Session["UserID"] = user;
-				return View();
-			}
-			else
-			{
-				return RedirectToAction("Login", "Account");
-			}
+			return View();
 		}
 
 		[HttpPost]
 		public ActionResult CreateGroup(WorkSpace ws, HttpPostedFileBase ImageWS)
 		{
-			string userid = User.Identity.GetUserId();
-			Session["UserId"] = userid;
+			
+			string userid = Session["UserId"].ToString();
 			if (ImageWS != null)
 			{
 				string avatar = "";
@@ -69,18 +61,10 @@ namespace CapstoneProject.Controllers
 		}
 		public ActionResult InviteMember(int? id)
 		{
-			if (Request.IsAuthenticated)
-			{
-				string user = User.Identity.GetUserId();
-				Session["UserID"] = user;
-				WorkSpace addmem = db.WorkSpaces.Find(id);
-				return View(addmem);
-			}
-			else
-			{
-				return RedirectToAction("Login", "Account");
-			}
-		}
+            string userid = Session["UserId"].ToString();
+            WorkSpace addmem = db.WorkSpaces.Find(id);
+			return View(addmem);
+	    }
 		[HttpPost]
 		public ActionResult InviteMember(WorkSpace model, List<string> adduser)
 		{
