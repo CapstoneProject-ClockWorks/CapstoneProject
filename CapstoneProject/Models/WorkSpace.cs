@@ -18,6 +18,7 @@ namespace CapstoneProject.Models
         public WorkSpace()
         {
             this.WS_User_Roles = new HashSet<WS_User_Roles>();
+            this.Processes = new HashSet<Process>();
         }
     
         public int ID { get; set; }
@@ -30,5 +31,7 @@ namespace CapstoneProject.Models
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WS_User_Roles> WS_User_Roles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Process> Processes { get; set; }
     }
 }

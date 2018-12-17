@@ -56,13 +56,38 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="Direction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Process_ID" Type="int" Nullable="false" />
+          <Property Name="LinkData" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Process">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProcessName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Group_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Steps">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Process_ID" Type="int" Nullable="false" />
+          <Property Name="NodeData" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="WorkSpace">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WorkSpaceName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="User_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ImageWS" Type="nvarchar(max)" />
           <Property Name="Createdate" Type="date" />
@@ -134,6 +159,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Direction_Process">
+          <End Role="Process" Type="Self.Process" Multiplicity="1" />
+          <End Role="Direction" Type="Self.Direction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Process">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Direction">
+              <PropertyRef Name="Process_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Process_WorkSpace">
+          <End Role="WorkSpace" Type="Self.WorkSpace" Multiplicity="1" />
+          <End Role="Process" Type="Self.Process" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkSpace">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Process">
+              <PropertyRef Name="Group_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Steps_Process">
+          <End Role="Process" Type="Self.Process" Multiplicity="1" />
+          <End Role="Steps" Type="Self.Steps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Process">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Steps">
+              <PropertyRef Name="Process_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_WorkSpace_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="WorkSpace" Type="Self.WorkSpace" Multiplicity="*" />
@@ -176,6 +237,9 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Direction" EntityType="Self.Direction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Process" EntityType="Self.Process" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Steps" EntityType="Self.Steps" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkSpace" EntityType="Self.WorkSpace" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WS_User_Roles" EntityType="Self.WS_User_Roles" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -193,6 +257,18 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Direction_Process" Association="Self.FK_Direction_Process">
+            <End Role="Process" EntitySet="Process" />
+            <End Role="Direction" EntitySet="Direction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Process_WorkSpace" Association="Self.FK_Process_WorkSpace">
+            <End Role="WorkSpace" EntitySet="WorkSpace" />
+            <End Role="Process" EntitySet="Process" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Steps_Process" Association="Self.FK_Steps_Process">
+            <End Role="Process" EntitySet="Process" />
+            <End Role="Steps" EntitySet="Steps" />
           </AssociationSet>
           <AssociationSet Name="FK_WorkSpace_AspNetUsers" Association="Self.FK_WorkSpace_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -350,6 +426,21 @@
             <End Role="WorkSpace" EntitySet="WorkSpaces" />
             <End Role="WS_User_Roles" EntitySet="WS_User_Roles" />
           </AssociationSet>
+          <EntitySet Name="Directions" EntityType="cap21t8Model.Direction" />
+          <EntitySet Name="Processes" EntityType="cap21t8Model.Process" />
+          <EntitySet Name="Steps" EntityType="cap21t8Model.Step" />
+          <AssociationSet Name="FK_Direction_Process" Association="cap21t8Model.FK_Direction_Process">
+            <End Role="Process" EntitySet="Processes" />
+            <End Role="Direction" EntitySet="Directions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Process_WorkSpace" Association="cap21t8Model.FK_Process_WorkSpace">
+            <End Role="WorkSpace" EntitySet="WorkSpaces" />
+            <End Role="Process" EntitySet="Processes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Steps_Process" Association="cap21t8Model.FK_Steps_Process">
+            <End Role="Process" EntitySet="Processes" />
+            <End Role="Step" EntitySet="Steps" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="WorkSpace">
           <Key>
@@ -357,12 +448,13 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WorkSpaceName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="User_ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ImageWS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Createdate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="AspNetUser" Relationship="cap21t8Model.FK_WorkSpace_AspNetUsers" FromRole="WorkSpace" ToRole="AspNetUser" />
           <NavigationProperty Name="WS_User_Roles" Relationship="cap21t8Model.FK_WS_User_Roles_WorkSpace" FromRole="WorkSpace" ToRole="WS_User_Roles" />
+          <NavigationProperty Name="Processes" Relationship="cap21t8Model.FK_Process_WorkSpace" FromRole="WorkSpace" ToRole="Process" />
         </EntityType>
         <Association Name="FK_WorkSpace_AspNetUsers">
           <End Type="cap21t8Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -385,6 +477,72 @@
             </Principal>
             <Dependent Role="WS_User_Roles">
               <PropertyRef Name="WorkSpace_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Direction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Process_ID" Type="Int32" Nullable="false" />
+          <Property Name="LinkData" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Process" Relationship="cap21t8Model.FK_Direction_Process" FromRole="Direction" ToRole="Process" />
+        </EntityType>
+        <EntityType Name="Process">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProcessName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Group_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Directions" Relationship="cap21t8Model.FK_Direction_Process" FromRole="Process" ToRole="Direction" />
+          <NavigationProperty Name="WorkSpace" Relationship="cap21t8Model.FK_Process_WorkSpace" FromRole="Process" ToRole="WorkSpace" />
+          <NavigationProperty Name="Steps" Relationship="cap21t8Model.FK_Steps_Process" FromRole="Process" ToRole="Step" />
+        </EntityType>
+        <EntityType Name="Step">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Process_ID" Type="Int32" Nullable="false" />
+          <Property Name="NodeData" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Process" Relationship="cap21t8Model.FK_Steps_Process" FromRole="Step" ToRole="Process" />
+        </EntityType>
+        <Association Name="FK_Direction_Process">
+          <End Type="cap21t8Model.Process" Role="Process" Multiplicity="1" />
+          <End Type="cap21t8Model.Direction" Role="Direction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Process">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Direction">
+              <PropertyRef Name="Process_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Process_WorkSpace">
+          <End Type="cap21t8Model.WorkSpace" Role="WorkSpace" Multiplicity="1" />
+          <End Type="cap21t8Model.Process" Role="Process" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkSpace">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Process">
+              <PropertyRef Name="Group_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Steps_Process">
+          <End Type="cap21t8Model.Process" Role="Process" Multiplicity="1" />
+          <End Type="cap21t8Model.Step" Role="Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Process">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="Process_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -467,6 +625,34 @@
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="WorkSpaceName" ColumnName="WorkSpaceName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Directions">
+            <EntityTypeMapping TypeName="cap21t8Model.Direction">
+              <MappingFragment StoreEntitySet="Direction">
+                <ScalarProperty Name="LinkData" ColumnName="LinkData" />
+                <ScalarProperty Name="Process_ID" ColumnName="Process_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Processes">
+            <EntityTypeMapping TypeName="cap21t8Model.Process">
+              <MappingFragment StoreEntitySet="Process">
+                <ScalarProperty Name="Group_ID" ColumnName="Group_ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProcessName" ColumnName="ProcessName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Steps">
+            <EntityTypeMapping TypeName="cap21t8Model.Step">
+              <MappingFragment StoreEntitySet="Steps">
+                <ScalarProperty Name="NodeData" ColumnName="NodeData" />
+                <ScalarProperty Name="Process_ID" ColumnName="Process_ID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
