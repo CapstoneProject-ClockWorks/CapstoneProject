@@ -13,7 +13,8 @@ namespace CapstoneProject
                 "~/Content/libs/font-awesome-4/css/font-awesome.min.css",
                 "~/Content/libs/font-awesome-5/css/all.css",
                 "~/Content/libs/bootstrap/dist/css/bootstrap.min.css",
-                "~/Content/build/css/responsive.css"
+                "~/Content/build/css/responsive.css",
+                "~/Content/build/css/grid-boostrap-fixheight.css"
             ));
             bundles.Add(new ScriptBundle("~/Content/js").Include(
                 "~/Content/libs/jquery/dist/jquery.min.js",

@@ -515,7 +515,7 @@ body {
   border: 1px solid #dfe2e5;
 }
 .cw-card .cw-group-image {
-  max-height: 180px;
+  height: 180px;
   overflow: hidden;
 }
 .cw-card .cw-group-image img {

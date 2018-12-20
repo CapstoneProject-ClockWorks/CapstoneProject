@@ -18,28 +18,20 @@ namespace CapstoneProject.Controllers
         // GET: Group
         public ActionResult Index()
         {
-            var viewlistworkspace = db.WorkSpaces.OrderByDescending(m => m.ID).ToList();
-            return View(viewlistworkspace);
+            var listgroup = db.WorkSpaces.OrderByDescending(m => m.ID).ToList();
+            ViewData["ListGroup"] = listgroup;
+            return View();
         }
         public ActionResult CreateGroup()
         {
-            if (Request.IsAuthenticated)
-            {
-                string user = User.Identity.GetUserId();
-                Session["UserID"] = user;
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            return View();
         }
 
         [HttpPost]
         public ActionResult CreateGroup(WorkSpace ws, HttpPostedFileBase ImageWS)
         {
-            string userid = User.Identity.GetUserId();
-            Session["UserId"] = userid;
+
+            string userid = Session["UserId"].ToString();
             if (ImageWS != null)
             {
                 string avatar = "";
@@ -52,10 +44,10 @@ namespace CapstoneProject.Controllers
                 }
                 ws.ImageWS = avatar;
             }
-            //else
-            //{
-            //	ws.ImageWS = "default.png";
-            //}
+            else
+            {
+                ws.ImageWS = "default.png";
+            }
             ws.Createdate = DateTime.Now;
             ws.User_ID = userid;
             WS_User_Roles wsp = new WS_User_Roles();
@@ -69,35 +61,23 @@ namespace CapstoneProject.Controllers
         }
         public ActionResult InviteMember(int? id)
         {
-            if (Request.IsAuthenticated)
-            {
-                string user = User.Identity.GetUserId();
-                Session["UserID"] = user;
-                WorkSpace addmem = db.WorkSpaces.Find(id);
-                return View(addmem);
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            string userid = Session["UserId"].ToString();
+            WorkSpace addmem = db.WorkSpaces.Find(id);
+            return View(addmem);
         }
         [HttpPost]
         public ActionResult InviteMember(WorkSpace model, List<string> adduser)
         {
             WorkSpace wp = db.WorkSpaces.Find(model.ID);
-            if (adduser != null)
+            foreach (var user in adduser)
             {
-                foreach (var user in adduser)
-                {
-                    WS_User_Roles wsuser = new WS_User_Roles();
-                    wsuser.User_ID = db.AspNetUsers.SingleOrDefault(x => x.Email == user).Id;
-                    wsuser.WorkSpace_ID = wp.ID;
-                    wsuser.Role_Member = true;
-                    db.WS_User_Roles.Add(wsuser);
-                    db.SaveChanges();
+                WS_User_Roles wsuser = new WS_User_Roles();
+                wsuser.User_ID = db.AspNetUsers.SingleOrDefault(x => x.Email == user).Id;
+                wsuser.WorkSpace_ID = wp.ID;
+                wsuser.Role_Member = true;
+                db.WS_User_Roles.Add(wsuser);
+                db.SaveChanges();
 
-                }
-                return RedirectToAction("ShowGroup", new { id = model.ID });
             }
             return RedirectToAction("ShowGroup", new { id = model.ID });
         }
@@ -117,6 +97,13 @@ namespace CapstoneProject.Controllers
             db.WS_User_Roles.Remove(wp);
             db.SaveChanges();
             return RedirectToAction("AddMemberWS", new { id = wp.WorkSpace_ID });
+        }
+        public ActionResult MemberOutGroup(WS_User_Roles model)
+        {
+            WS_User_Roles wp = db.WS_User_Roles.Find(model.ID);
+            db.WS_User_Roles.Remove(wp);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         public ActionResult ShowGroup(int? id)
@@ -199,6 +186,7 @@ namespace CapstoneProject.Controllers
             return RedirectToAction("AddMemberWS", new { id = wsp.WorkSpace_ID });
         }
 
+
         public ActionResult CreateProcess(int? id)
         {
             Process ws = db.Processes.Find(id);
@@ -207,16 +195,16 @@ namespace CapstoneProject.Controllers
 
         [HttpPost]
         public ActionResult CreateProcess(WorkSpace model, Process proo)
-        {            
+        {
             WorkSpace ws = db.WorkSpaces.Find(model.ID);
             Process ps = new Process();
             ps.ProcessName = proo.ProcessName;
             ps.Description = proo.Description;
             ps.Group_ID = model.ID;
             db.Processes.Add(ps);
-            
+
             db.SaveChanges();
-            return RedirectToAction("DrawProcess",new { id = ps.ID});
+            return RedirectToAction("DrawProcess", new { id = ps.ID });
         }
 
         public ActionResult DrawProcess(int? id)
@@ -224,6 +212,5 @@ namespace CapstoneProject.Controllers
             Process ws = db.Processes.Find(id);
             return View(ws);
         }
-
-	}
+    }
 }

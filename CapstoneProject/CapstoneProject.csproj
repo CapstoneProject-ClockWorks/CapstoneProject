@@ -334,10 +334,12 @@
     <Compile Include="Models\WS_User_Roles.cs">
       <DependentUpon>PMS_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\GroupViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\build\css\custom.css" />
     <Content Include="Content\build\css\custom.min.css" />
+    <Content Include="Content\build\css\grid-boostrap-fixheight.css" />
     <Content Include="Content\build\css\guest-style.css" />
     <Content Include="Content\build\css\responsive.css" />
     <Content Include="Content\build\css\style.css" />

@@ -1,5 +1,6 @@
 ﻿@model CapstoneProject.Models.WorkSpace
 @using CapstoneProject.Models
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "AddMemberWS";
@@ -7,6 +8,9 @@
 
     var db = new PMSEntities();
     var rs = db.WS_User_Roles.ToList();
+    WS_User_Roles ws = new WS_User_Roles();
+    string user = User.Identity.GetUserId();
+    Session["UserID"] = user;
 
 }
 @section CustomCss {
@@ -26,13 +30,13 @@
     </div>
     <ul class="cw-tabs">
         <li rel="process">
-            <i class="fas fa-sitemap">@Html.ActionLink("Processes", "ShowGroup", new { id = Model.ID })</i>&nbsp;
+            <a href="@Url.Action("ShowGroup", "Group", new { id = Model.ID })"><i class="fas fa-sitemap"></i> Process</a>
         </li>
-        <li class="cw-active-tab" rel="members">
-            <i class="fas fa-user-friends">@Html.ActionLink("Members", "AddMemberWS", new { id = Model.ID })</i>&nbsp;
+        <li rel="members" class="cw-active-tab">
+            <a href="@Url.Action("AddMemberWS", "Group", new { id = Model.ID })"><i class="fas fa-user-friends"></i> Members</a>
         </li>
         <li rel="settings">
-            <i class="fas fa-cog">@Html.ActionLink("Settings", "SettingGroup", new { id = Model.ID })</i>&nbsp;
+            <a href="@Url.Action("SettingGroup", "Group", new { id = Model.ID })"><i class="fas fa-cog"></i> Settings</a>
         </li>
     </ul>
 </div>
@@ -83,8 +87,6 @@
 
     @{
         var listuser = db.WS_User_Roles.Where(x => x.WorkSpace_ID == Model.ID).ToList();
-
-
     }
 
 
@@ -116,9 +118,28 @@
                         }
                     </td>
                     <td>
-                        @Html.ActionLink("Edit Role", "EditRoleMemberWS", new { id = item.ID })
-                        <span>|</span>
-                        <a href="@Url.Action("DeleteMember","Group",new { id = item.ID })" onclick="return confirmDelete()" class="delele-user">Delete Role</a>
+                        @foreach (var items in listuser)
+                        {
+                            if (items.Role_Admin == true)
+                            {
+                                if (items.User_ID == user)
+                                {
+                                    @Html.ActionLink("Edit Role", "EditRoleMemberWS", new { id = item.ID })
+                                }
+                            }
+                        }
+
+                        @foreach (var items in listuser)
+                        {
+                            if (items.Role_Admin == true && items.User_ID == user)
+                            {
+                                <span>|</span>
+                                <a href="@Url.Action("DeleteMember", "Group", new { id = item.ID })" onclick="return confirmDelete()" class="delele-user">Delete Role</a>
+                                <span>|</span>
+                            }
+                        }
+
+                        <a href="@Url.Action("MemberOutGroup", "Group", new { id = item.ID })" onclick="return confirmOut()" class="delete-user">Out Group</a>
                     </td>
                 </tr>
             }
@@ -138,6 +159,12 @@
         function confirmDelete() {
             var a = confirm("Do you want to delete!");
             return a;
+        }
+    </script>
+    <script>
+        function confirmOut() {
+            var b = confirm("Do you want to delete!");
+            return b;
         }
     </script>
 }

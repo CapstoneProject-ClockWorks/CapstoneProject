@@ -59,7 +59,7 @@
         </li>
     </ol>
     <div class="cw-create-workspace">
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             <h2 class="cw-header-light">Create your group right away!!</h2>
@@ -70,6 +70,14 @@
                     @Html.EditorFor(model => model.WorkSpaceName, new { htmlAttributes = new { @class = "form-control", @Required = "required" } })
                     @Html.ValidationMessageFor(model => model.WorkSpaceName, "", new { @class = "text-danger" })
                     <span class="cw-hint">This will be your workspace name on our website</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", required = true })
+                   
+                    <span class="cw-hint">Describe your group that you want to establish</span>
                 </div>
             </div>
             <div class="form-group row">
@@ -88,14 +96,6 @@
                             <img style="width: 200px;height: auto" id='img-upload' />
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
-                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @Required = "required" } })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                    <span class="cw-hint">Describe your group that you want to establish</span>
                 </div>
             </div>
             <div class="form-group row">
