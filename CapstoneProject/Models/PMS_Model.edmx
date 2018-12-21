@@ -72,6 +72,7 @@
           <Property Name="ProcessName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Group_ID" Type="int" Nullable="false" />
+          <Property Name="DataJson" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Steps">
           <Key>
@@ -90,7 +91,8 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="User_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ImageWS" Type="nvarchar(max)" />
-          <Property Name="Createdate" Type="date" />
+          <Property Name="Createdate" Type="datetime" Nullable="false" />
+          <Property Name="Updatedate" Type="datetime" />
         </EntityType>
         <EntityType Name="WS_User_Roles">
           <Key>
@@ -451,10 +453,11 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="User_ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ImageWS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Createdate" Type="DateTime" Precision="0" />
+          <Property Name="Createdate" Type="DateTime" Precision="3" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="cap21t8Model.FK_WorkSpace_AspNetUsers" FromRole="WorkSpace" ToRole="AspNetUser" />
           <NavigationProperty Name="WS_User_Roles" Relationship="cap21t8Model.FK_WS_User_Roles_WorkSpace" FromRole="WorkSpace" ToRole="WS_User_Roles" />
           <NavigationProperty Name="Processes" Relationship="cap21t8Model.FK_Process_WorkSpace" FromRole="WorkSpace" ToRole="Process" />
+          <Property Name="Updatedate" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_WorkSpace_AspNetUsers">
           <End Type="cap21t8Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -500,6 +503,7 @@
           <NavigationProperty Name="Directions" Relationship="cap21t8Model.FK_Direction_Process" FromRole="Process" ToRole="Direction" />
           <NavigationProperty Name="WorkSpace" Relationship="cap21t8Model.FK_Process_WorkSpace" FromRole="Process" ToRole="WorkSpace" />
           <NavigationProperty Name="Steps" Relationship="cap21t8Model.FK_Steps_Process" FromRole="Process" ToRole="Step" />
+          <Property Name="DataJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Step">
           <Key>
@@ -620,6 +624,7 @@
           <EntitySetMapping Name="WorkSpaces">
             <EntityTypeMapping TypeName="cap21t8Model.WorkSpace">
               <MappingFragment StoreEntitySet="WorkSpace">
+                <ScalarProperty Name="Updatedate" ColumnName="Updatedate" />
                 <ScalarProperty Name="Createdate" ColumnName="Createdate" />
                 <ScalarProperty Name="ImageWS" ColumnName="ImageWS" />
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
@@ -641,6 +646,7 @@
           <EntitySetMapping Name="Processes">
             <EntityTypeMapping TypeName="cap21t8Model.Process">
               <MappingFragment StoreEntitySet="Process">
+                <ScalarProperty Name="DataJson" ColumnName="DataJson" />
                 <ScalarProperty Name="Group_ID" ColumnName="Group_ID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ProcessName" ColumnName="ProcessName" />

@@ -11,9 +11,8 @@ namespace CapstoneProject.Models
 {
     using System;
     using System.Collections.Generic;
-	using System.ComponentModel.DataAnnotations;
-
-	public partial class WorkSpace
+    
+    public partial class WorkSpace
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public WorkSpace()
@@ -23,12 +22,12 @@ namespace CapstoneProject.Models
         }
     
         public int ID { get; set; }
-		[Required]
         public string WorkSpaceName { get; set; }
         public string Description { get; set; }
         public string User_ID { get; set; }
         public string ImageWS { get; set; }
-        public Nullable<System.DateTime> Createdate { get; set; }
+        public System.DateTime Createdate { get; set; }
+        public Nullable<System.DateTime> Updatedate { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

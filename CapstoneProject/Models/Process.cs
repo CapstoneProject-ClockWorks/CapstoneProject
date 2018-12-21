@@ -25,6 +25,7 @@ namespace CapstoneProject.Models
         public string ProcessName { get; set; }
         public string Description { get; set; }
         public int Group_ID { get; set; }
+        public string DataJson { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Direction> Directions { get; set; }

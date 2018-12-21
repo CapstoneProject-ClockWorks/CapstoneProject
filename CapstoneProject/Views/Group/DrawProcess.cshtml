@@ -249,8 +249,8 @@
   // end of TopRotatingTool class
   // Show the diagram's model in JSON format that the user may edit
   function save() {
-    saveDiagramProperties();  // do this first, before writing to JSON
-    document.getElementById("mySavedModel").value = myDiagram.model.toJson();
+      saveDiagramProperties();  // do this first, before writing to JSON
+      document.getElementById("mySavedModel").value = myDiagram.model.toJson();
     myDiagram.isModified = false;
   }
   function load() {
@@ -276,8 +276,9 @@
 
         <div>
             <div>
-                <button id="SaveButton" onclick="save()">Save</button>
-                <button onclick="load()">Load</button>
+                <button id="SaveButton" onclick="save()">Save</button>@*button này để tạo dữ liệu*@
+                <button onclick="load()">Load</button>@*button này để load dữ liệu*@
+                <button id="btn-save" type="submit" class="btn btn-success"> save to db</button>@*button này để lưu dữ liệu*@
                 Diagram Model saved in JSON format:
             </div>
             <textarea id="mySavedModel" style="width:100%;height:300px">
@@ -291,4 +292,34 @@
     </div>
 </body>
 </html>
+<script src="~/Content/libs/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function ($) {
+        $('#btn-save').on('click', function () {
+            let data = $("#mySavedModel").val();
 
+            //let linkDataArray = $("#myDiagram.model.linkDataArray").val();
+            //let nodeDataArray = $("#myDiagram.model.nodeDataArray").val();
+            let idProcess = @Model.ID;
+            //truyen nguyen cai json voi idGroup
+            let a = {
+                data: data,
+                processId: idProcess,
+                //linkDataArray: linkDataArray,
+                //nodeDataArray: nodeDataArray
+            }
+            //truyen qua controller
+            $.ajax({
+                url: "/Group/DrawProcess/",
+                type: "POST",
+                data: a,
+                dataType: "json",
+                success: function (response) {
+                    //thanh cong thi no tra du lieu ve
+                    console.log(response);
+                    location.href = '/Group/ShowGroup/' + response.id;
+                }
+            })
+        })
+    })
+</script>

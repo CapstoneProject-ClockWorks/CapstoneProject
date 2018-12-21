@@ -212,5 +212,17 @@ namespace CapstoneProject.Controllers
             Process ws = db.Processes.Find(id);
             return View(ws);
         }
+        [HttpPost]
+        public JsonResult DrawProcess(int processId ,string data/*, Array[] linkDataArray, Array[] nodeDataArray*/)
+        {
+            Process ws = db.Processes.Find(processId);
+            ws.DataJson = data.ToString();
+            db.Entry(ws).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            //return RedirectToAction("ShowGroup", new { id = ws.Group_ID });
+            return Json(new { id = ws.Group_ID });
+            //return Json(new { data = data , processId = processId, linkDataArray = linkDataArray, nodeDataArray = nodeDataArray });
+        }
+
     }
 }
